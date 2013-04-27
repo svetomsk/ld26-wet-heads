@@ -96,7 +96,7 @@ public class Entity {
 	{
 		if(img == null)
 		{
-			img = Pictures.damageMignon;
+			img = Pictures.roll;
 		}
 		currentFrame = (int) Math.random()*100;
 		subFrame = (int) Math.random()*100;
