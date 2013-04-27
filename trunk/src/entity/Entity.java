@@ -15,7 +15,6 @@ import main.World;
 import main.saving.IDManager;
 import block.Block;
 import entity.mob.Angel;
-import entity.mob.Character;
 import entity.mob.Mob;
 import entity.mob.snake.SnakeHead;
 
@@ -325,7 +324,7 @@ public class Entity {
 	}	
 	protected boolean interactOnMob(Mob mob)
 	{
-		if(mob instanceof Character) return interactOnCharacter((Character) mob);
+//		if(mob instanceof Character) return interactOnCharacter((Character) mob);
 		if(mob instanceof Chest) return interactOnChest((Chest) mob);
 		
 		return true;
