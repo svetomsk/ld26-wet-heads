@@ -29,10 +29,9 @@ public class GUI extends Controller
 	{
         //walk
         if(input.right.down) mob.onRight();
-        else if(input.left.down) mob.onLeft();
-        
-        //jump
+        if(input.left.down) mob.onLeft();
         if(input.up.down) mob.onUp();
+        if(input.down.down) mob.onDown();
         
 //        //weapon
 //        if(input.b0Clicked)
