@@ -106,6 +106,10 @@ public class Entity {
 		updateVelocity();
 		updateCoord();
 		
+		animationTick();
+	}
+	protected void animationTick()
+	{
 		subFrame++;
 		if(subFrame>=3)
 		{
@@ -114,6 +118,7 @@ public class Entity {
 			subFrame = 0;
 		}
 	}
+	
 	protected void updateVelocity()
 	{    	
 		if(Math.abs(lvx) < 1) lvx = 0;

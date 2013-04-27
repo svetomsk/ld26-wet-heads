@@ -14,6 +14,7 @@ public class SnakeHead extends SnakePart
 //	public int cooldownAfterDamage;
 	private GUI control;
 	private double v = 0;
+	private double angle = Math.PI;
 	
 	public ArrayList<SnakePart> body = new ArrayList<SnakePart>();
 	
@@ -30,7 +31,7 @@ public class SnakeHead extends SnakePart
 		group = Group.character;
 		
 		body.add((SnakePart) new SnakePart().init(getX()+getWidth(), getY(), 0, 0, 0, 0, world, this));
-		for(int q=0;q<64;q++)
+		for(int q=0;q<32;q++)
 		{
 			SnakePart part = body.get(body.size()-1);
 			body.add((SnakePart) new SnakePart().init(part.getX()+part.getWidth(), part.getY()-part.getHeight()/2, 0, 0, 0, 0, world, part));
@@ -42,9 +43,14 @@ public class SnakeHead extends SnakePart
 	@Override
 	public void tick()
 	{
+		lvx = v*Math.cos(angle);
+		lvy = v*Math.sin(angle);
 		super.tick();
-		
-		angle = getAngle(lvx, lvy)-Math.PI/2;
+	}
+	@Override
+	protected void slowly()
+	{
+		v *= getSpeed()/(getSpeed()+1);
 	}
 	
 	@Override
@@ -55,35 +61,44 @@ public class SnakeHead extends SnakePart
 //		cooldownAfterDamage = 12;
 	}
 	
+	@Override
+	public void onLeft()
+	{
+		angle -= Math.PI/40;
+	}
+	@Override
+	public void onRight()
+	{
+		angle += Math.PI/40;
+	}
+	
     @Override
     public void onUp() 
     {
-    	super.onUp();
     	v++;
     }
     @Override
 	public void onDown()
 	{
-		super.onDown();
     	v--;
 	}
     
     @Override
     protected void initPictures() 
     {
-    	img = Pictures.roll;
+    	img = Pictures.headsnake;
     }
     @Override
     public void draw(Graphics2D g)
     {
-    	int drawx = (int) (x-Game.x+width/2);
-    	int drawy = (int) (y-Game.y+height/2);
+    	int drawx = (int) (getX()-Game.x);
+    	int drawy = (int) (getY()-Game.y);
 
 //		double angle = getAngle(lvx, lvy);
 		  
-		g.rotate(angle+Math.PI/2, drawx, drawy);
-		g.drawImage(img[currentFrame], drawx-img[currentFrame].getWidth(null)/2, drawy-img[currentFrame].getHeight(null)/2, null);
-		g.rotate(-angle-Math.PI/2, drawx, drawy);
+		g.rotate(angle-Math.PI/2, drawx, drawy);
+		g.drawImage(img, drawx-img.getWidth(null)/2, drawy-img.getHeight(null)/2, null);
+		g.rotate(-angle+Math.PI/2, drawx, drawy);
         
 //        double angle = getAngle(control.getX()-drawx, control.getY()-drawy)+Math.PI/2;
         
@@ -100,7 +115,7 @@ public class SnakeHead extends SnakePart
     @Override
 	public double getSpeed()
 	{
-		return 9;
+		return 16;
 	}
 //    @Override
 //	public double getJumpPower()

@@ -22,15 +22,24 @@ public class Pictures
     public static Image blood;
     
     public static Image level1;
+
+    public static Image bodysnake;
+    public static Image tailsnake;
+    public static Image headsnake;
     
     public Pictures()
     {
         try 
         {
-            pause = ImageIO.read(new File("resources/pause.png"));
+        	pause = ImageIO.read(new File("resources/pause.png"));
+        	
+        	bodysnake = ImageIO.read(new File("resources/bodysnake.png"));
+        	tailsnake = ImageIO.read(new File("resources/tailsnake.png"));
+        	headsnake = ImageIO.read(new File("resources/headsnake.png"));
             
             blood = ImageIO.read(new File("resources/blood.png"));
             level1 = ImageIO.read(new File("resources/level1.png"));
+            
             complete_first = new Image[3];
             complete_first[0] = ImageIO.read(new File("resources/level2.png"));
             
@@ -43,6 +52,16 @@ public class Pictures
             
             aasf = new AreaAveragingScaleFilter(1280, 1280);
             level1= s.createImage(new FilteredImageSource(level1.getSource(), aasf));
+            
+            aasf = new AreaAveragingScaleFilter(32, 32);
+            bodysnake = s.createImage(new FilteredImageSource(bodysnake.getSource(), aasf));
+            
+            aasf = new AreaAveragingScaleFilter(32, 48);
+            tailsnake = s.createImage(new FilteredImageSource(tailsnake.getSource(), aasf));
+            
+            aasf = new AreaAveragingScaleFilter(64, 64);
+            headsnake = s.createImage(new FilteredImageSource(headsnake.getSource(), aasf));
+            
         } catch (IOException ex) {
             Logger.getLogger(Pictures.class.getName()).log(Level.SEVERE, null, ex);
         }

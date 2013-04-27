@@ -26,10 +26,10 @@ public class SnakeTail extends SnakePart
     	
     	double r2 = (frontPart.getX()-getX())*(frontPart.getX()-getX()) + (frontPart.getY()-getY())*(frontPart.getY()-getY());
     	
-    	if(getWidth()*getWidth() < r2)
+    	if(segment_gap*segment_gap < r2)
     	{
-    		setX((long) (frontPart.getX() + getWidth()*Math.cos(angle)));
-    		setY((long) (frontPart.getY() + getWidth()*Math.sin(angle)));
+    		setX((long) (frontPart.getX() + segment_gap*Math.cos(angle)));
+    		setY((long) (frontPart.getY() + segment_gap*Math.sin(angle)));
     	}
 	}
 	@Override
@@ -40,7 +40,6 @@ public class SnakeTail extends SnakePart
     @Override
     protected void initPictures() 
     {
-    	img = Pictures.roll;
-    	super.initPictures();
+    	img = Pictures.tailsnake;
     }
 }
