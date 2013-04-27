@@ -1,12 +1,14 @@
 package main;
 
 import java.awt.Graphics2D;
+import java.awt.Image;
 
-import main.saving.IDManager;
 import block.Block;
 
 public class Island {
 
+	private Image map = Pictures.level1; 
+	
 	public byte[][] blocks;
 	private double vx, vy;
 	private long x, y;
@@ -66,39 +68,55 @@ public class Island {
 	public void draw(Graphics2D g)
 	{
 		int BLOCK_SIZE = world.BLOCK_SIZE;
-		int x1 = Math.max(0, (int) ((Game.x-x)/BLOCK_SIZE));
-		int x2 = Math.min(blocks.length, (int) ((Game.x+Game.WIDTH-x)/BLOCK_SIZE)+1);
-		int y1 = Math.max(0, (int) ((Game.y-y) / BLOCK_SIZE));
-		int y2 = Math.min(blocks[0].length, (int) ((Game.y+Game.HEIGHT-y) / BLOCK_SIZE)+1);		
 		
-		Block block;
+		int x1 = (int) (Math.max(0, map.getWidth(null)*(Game.x-x)/(blocks[0].length*BLOCK_SIZE)));
+		int x2 = (int) (Math.min(map.getWidth(null), map.getHeight(null)*(Game.y-y)/(blocks.length*BLOCK_SIZE)));
 		
-    	for(int q=x1;q<x2;q++)
-    	{
-    		for(int w=y1;w<y2;w++)
-    		{
-    			block = null;
-    			if(blocks[q][w] == 0) continue;
-    			try
-				{
-					block = (Block) IDManager.getBlockClass(blocks[q][w]).newInstance();
-				}
-    			catch (InstantiationException e)
-				{
-					// TODO Auto-generated catch block
-//					e.printStackTrace();
-				} catch (IllegalAccessException e)
-				{
-					// TODO Auto-generated catch block
-//					e.printStackTrace();
-				}
-
-    			if(block == null) continue;
-    			g.setColor(block.getColor());
-    			
-    			g.fillRect((int)x+q*world.BLOCK_SIZE - Game.x, (int)y+w*world.BLOCK_SIZE - Game.y, world.BLOCK_SIZE, world.BLOCK_SIZE);
-    		}
-    	}
+		int y1 = (int) (Math.max(0, map.getWidth(null)*(Game.x-x+Game.WIDTH)/(blocks[0].length*BLOCK_SIZE)));
+		int y2 = (int) (Math.min(map.getHeight(null), map.getHeight(null)*(Game.HEIGHT+Game.y-y)/(blocks.length*BLOCK_SIZE)));
+		
+		int sx1 = (int) (x-Game.x);
+		int sy1 = (int) (y-Game.y);
+		
+		int sx2 = (int) Math.min(Game.WIDTH, x-Game.x+blocks.length*BLOCK_SIZE);
+		int sy2 = (int) Math.min(Game.HEIGHT, y-Game.y+blocks[0].length*BLOCK_SIZE);
+		
+//		g.drawImage(map, x1, y1, x2, y2, sx1, sy1, sx2, sy2, null);
+		g.drawImage(map, sx1, sy1, map.getWidth(null), map.getHeight(null), null);
+		
+//		int x1 = Math.max(0, (int) ((Game.x-x)/BLOCK_SIZE));
+//		int x2 = Math.min(blocks.length, (int) ((Game.x+Game.WIDTH-x)/BLOCK_SIZE)+1);
+//		int y1 = Math.max(0, (int) ((Game.y-y) / BLOCK_SIZE));
+//		int y2 = Math.min(blocks[0].length, (int) ((Game.y+Game.HEIGHT-y) / BLOCK_SIZE)+1);		
+//		
+//		Block block;
+//		
+//    	for(int q=x1;q<x2;q++)
+//    	{
+//    		for(int w=y1;w<y2;w++)
+//    		{
+//    			block = null;
+//    			if(blocks[q][w] == 0) continue;
+//    			try
+//				{
+//					block = (Block) IDManager.getBlockClass(blocks[q][w]).newInstance();
+//				}
+//    			catch (InstantiationException e)
+//				{
+//					// TODO Auto-generated catch block
+////					e.printStackTrace();
+//				} catch (IllegalAccessException e)
+//				{
+//					// TODO Auto-generated catch block
+////					e.printStackTrace();
+//				}
+//
+//    			if(block == null) continue;
+//    			g.setColor(block.getColor());
+//    			
+//    			g.fillRect((int)x+q*world.BLOCK_SIZE - Game.x, (int)y+w*world.BLOCK_SIZE - Game.y, world.BLOCK_SIZE, world.BLOCK_SIZE);
+//    		}
+//    	}
 	}
 	public static void collide(Island i1, Island i2)
 	{

@@ -20,7 +20,7 @@ public class Pictures
     public static Image chest[] = loadAndCut("resources/chest.png", 6, 32);
     public static Image blood;
     
-    public static Image background;
+    public static Image level1;
     
     public Pictures()
     {
@@ -29,7 +29,7 @@ public class Pictures
             pause = ImageIO.read(new File("resources/pause.png"));
             
             blood = ImageIO.read(new File("resources/blood.png"));
-            background = ImageIO.read(new File("resources/background.png"));
+            level1 = ImageIO.read(new File("resources/level1.png"));
             
             Canvas s = new Canvas();
             
@@ -38,8 +38,8 @@ public class Pictures
             aasf = new AreaAveragingScaleFilter(12, 12);
             blood= s.createImage(new FilteredImageSource(blood.getSource(), aasf));
             
-            aasf = new AreaAveragingScaleFilter(1024, 1024);
-            background= s.createImage(new FilteredImageSource(background.getSource(), aasf));
+            aasf = new AreaAveragingScaleFilter(1280, 1280);
+            level1= s.createImage(new FilteredImageSource(level1.getSource(), aasf));
         } catch (IOException ex) {
             Logger.getLogger(Pictures.class.getName()).log(Level.SEVERE, null, ex);
         }

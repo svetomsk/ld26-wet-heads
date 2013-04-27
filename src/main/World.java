@@ -59,7 +59,7 @@ public class World
 
 	private void parseInput()
 	{
-		byte[][] arr = ImageParser.parseBlocks("resources/firstIsland.png");
+		byte[][] arr = ImageParser.parseBlocks("resources/level1_phys.png");
 		new Island(0, 0, 0, 0, this, arr);
 	}
 
