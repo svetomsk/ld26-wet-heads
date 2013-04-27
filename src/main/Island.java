@@ -4,8 +4,6 @@ import java.awt.Graphics2D;
 
 import main.saving.IDManager;
 import block.Block;
-import block.decor.Background;
-import block.decor.Ghost_Rock;
 
 public class Island {
 
@@ -33,11 +31,6 @@ public class Island {
 	}
 	public void tickBlock(int x, int y)
 	{
-		if(blocks[x][y] == IDManager.getBlockID(Ghost_Rock.class))
-		{
-			blocks[x][y] = IDManager.getBlockID(Background.class);
-		}
-		
 //		Block block = blocks[x][y];
 //		if(block == null) return;
 //		blocks[x][y].tick();
