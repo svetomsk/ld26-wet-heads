@@ -12,11 +12,13 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.logging.Level;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -44,6 +46,8 @@ public class Game extends Canvas implements Runnable
     private static GUI gui;    
     private static World world;
     
+    private static TrackList tl;
+            
     public static Pictures pic;
     
     public Game(Dimension size) 
@@ -78,10 +82,9 @@ public class Game extends Canvas implements Runnable
     	
         requestFocus();
     }
-    private void init(String name)
+    private void init(String name) throws MalformedURLException, UnsupportedAudioFileException, IOException, Exception
     {
     	input = inputHandler.update(SIZE);
-    	
     	try 
     	{
 			world = Date.load(name);
@@ -96,33 +99,13 @@ public class Game extends Canvas implements Runnable
     }
     
     static Clip clip;
-    
-    private static void doPlay(final String url) {
-        try {
-            stopPlay();
-            AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File("resources/music.wav"));
-            clip = AudioSystem.getClip();
-            clip.open(inputStream);
-            clip.start();
-        } catch (Exception e) {
-            stopPlay();
-            System.err.println(e.getMessage());
-        }
-    }
-     
-    private static void stopPlay() {
-        if (clip != null) {
-            clip.stop();
-            clip.close();
-            clip = null;
-        }
-    }
+        
     
     private static long nextTime;
     @Override
     public void run() 
     {
-//    	init();
+    	init();
     	int fps = 60;
     	int maxSkipFrames = 10;
     	
@@ -154,6 +137,7 @@ public class Game extends Canvas implements Runnable
 	            physFrames++;
         	}
             swap();
+            TrackList.update();
             frames++;
             if(System.currentTimeMillis() > lastTimeFrame + 1000)
             {
@@ -268,8 +252,9 @@ public class Game extends Canvas implements Runnable
     	world.createLevel(++levelNumber);
     	nextTime = System.nanoTime();
     }
-    public static void finishLevel()
+    public static void finishLevel() throws IOException
     {
+        Level_complete complete = new Level_complete(levelNumber);
     	//Congrats.levelFinished(levelNumber);    	
     }
     
@@ -283,16 +268,9 @@ public class Game extends Canvas implements Runnable
     	tools.setLayout(new BorderLayout());
     	
     	JPanel lists = new JPanel();
-    	lists.setLayout(new BoxLayout(lists, BoxLayout.X_AXIS));
-    	tools.add(lists, BorderLayout.CENTER);
-    	
-    	//TODO (for flowing frame);
-    	
-//    	DefaultListModel model = new DefaultListModel();
-//    	for(int q=0;q<IDManager.)
-//    	JList blocks = new JList();
-    	
-    }
+    	lists.setLayout(new BoxLayout(lists, BoxLayout.X_AXIS));   
+    }    
+    
     private static void createMenuPanel()
     {
         menu = new JPanel();

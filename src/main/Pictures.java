@@ -18,6 +18,7 @@ public class Pictures
     
     public static Image roll[] = loadAndCut("resources/roll.png", 6, 256);
     public static Image chest[] = loadAndCut("resources/chest.png", 6, 32);
+    public static Image complete_first[];
     public static Image blood;
     
     public static Image level1;
@@ -30,6 +31,8 @@ public class Pictures
             
             blood = ImageIO.read(new File("resources/blood.png"));
             level1 = ImageIO.read(new File("resources/level1.png"));
+            complete_first = new Image[3];
+            complete_first[0] = ImageIO.read(new File("resources/level2.png"));
             
             Canvas s = new Canvas();
             
