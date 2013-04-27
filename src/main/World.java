@@ -31,8 +31,6 @@ public class World
 	public World()
 	{
 		clear();
-
-//		createLevel();
 		Game.pic = new Pictures();
 	}
 
@@ -43,24 +41,16 @@ public class World
 		particles = new ArrayList<Particle>();
 	}
 
-	public void createLevel()
+	public void createLevel(int n)
 	{
-//		ArrayList<Integer> mobsCoords = ImageParser.coords();
-//		character = new Character(mobsCoords.get(0), mobsCoords.get(1));
-//		new Island(0, 3000, 0, 0);
-		parseInput();
-
-//		Random r = new Random();
-//		for(int q=0;q<100;q++)
-//		{
-//			new Island((int)(5000*r.nextGaussian()), (int)(-7000*r.nextGaussian()), (int)(12*r.nextDouble()), (int)(12*r.nextDouble()));
-//		}
+		parseInput(n);
 	}
 
-	private void parseInput()
+	private void parseInput(int n)
 	{
-		byte[][] arr = ImageParser.parseBlocks("resources/level1_phys.png");
+		byte[][] arr = ImageParser.parseBlocks("resources/level"+n+"_phys.png");
 		new Island(0, 0, 0, 0, this, arr);
+		parseInputForEntities();
 	}
 
 	public void parseInputForEntities()

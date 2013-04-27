@@ -81,7 +81,7 @@ public class ImageParser
 
 				else
 				{
-					System.out.println("" + rgb);
+//					System.out.println("" + rgb);
 				}
 			}
 		}

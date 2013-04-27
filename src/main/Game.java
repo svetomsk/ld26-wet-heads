@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -73,8 +74,7 @@ public class Game extends Canvas implements Runnable
     	input = inputHandler.update(SIZE);
     	
     	world = new World();
-    	world.createLevel();
-    	world.parseInputForEntities();
+    	world.createLevel(1);
     	
         requestFocus();
     }
@@ -262,6 +262,17 @@ public class Game extends Canvas implements Runnable
 			e.printStackTrace();
 		}
 	}
+    private static int levelNumber = 1;
+    public static void nextLevel()
+    {
+    	world.createLevel(++levelNumber);
+    	nextTime = System.nanoTime();
+    }
+    public static void finishLevel()
+    {
+    	//Congrats.levelFinished(levelNumber);    	
+    }
+    
     private static JFrame frame, flowingFrame;
     private static JPanel menu, main, death, end, chooseMap, tools;
     private static Game gameComponents;

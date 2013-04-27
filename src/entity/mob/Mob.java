@@ -62,12 +62,14 @@ public class Mob extends Entity{
 	public void damage(int damage, int knockback, double dir)
 	{	
 		if(damage == 0) return;
+		
 		hp -= Math.max(damage - getStrength(), 0);
-		if(knockback>0)
-		{
-			this.lvx=dir*knockback;
-			this.lvy=-getJumpPower()*0.5;
-		}
+		
+//		if(knockback>0)
+//		{
+//			this.lvx=dir*knockback;
+//			this.lvy=-getJumpPower()*0.5;
+//		}
 		
 		for(int q=0;q<7;q++)
 		{
@@ -88,12 +90,7 @@ public class Mob extends Entity{
 	protected void slowly()
 	{
 		lvx *= getSpeed()/(getSpeed()+1);
-	}
-	@Override 
-	protected void updateCoord() 
-	{
-		onGround = false;
-		super.updateCoord();
+		lvy *= getSpeed()/(getSpeed()+1);
 	}
 	@Override
 	protected boolean collideIslands(boolean verticalWalls)
@@ -142,21 +139,19 @@ public class Mob extends Entity{
 	
 	public void onRight()
 	{
-		choosenDir = 1;
 		lvx++;
 	}
 	public void onLeft()
 	{
-		choosenDir = -1;
 		lvx--;
 	}
 	public void onUp()
 	{
-		if(onGround) lvy -= getJumpPower();
+		lvy--;
 	}
 	public void onDown()
 	{
-		
+		lvy++;
 	}
 	public boolean tryGet(Item item)
 	{
@@ -183,12 +178,12 @@ public class Mob extends Entity{
 	
 	public double getSpeed()
 	{
-		return 7;
+		return 15;
 	}
-	public double getJumpPower()
-	{
-		return 13;
-	}
+//	public double getJumpPower()
+//	{
+//		return 1;
+//	}
 	public int getMaxHP()
 	{
 		return 100;

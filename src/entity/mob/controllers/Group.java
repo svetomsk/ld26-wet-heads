@@ -7,7 +7,7 @@ import entity.mob.Mob;
 public class Group {
 
 	public static Group mobs = new Group(); 
-	public static Group villians = new Group();
+	public static Group character = new Group();
 	
 	private ArrayList<Mob> members = new ArrayList<Mob>();
 	

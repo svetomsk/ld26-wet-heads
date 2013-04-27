@@ -17,6 +17,7 @@ import block.Block;
 import entity.mob.Angel;
 import entity.mob.Character;
 import entity.mob.Mob;
+import entity.mob.snake.SnakeHead;
 
 public class Entity {
 
@@ -116,13 +117,14 @@ public class Entity {
 	}
 	protected void updateVelocity()
 	{    	
-        lvy += world.GRAVITY;
-        if(Math.abs(lvx) < 1) lvx = 0;
+		if(Math.abs(lvx) < 1) lvx = 0;
+		if(Math.abs(lvy) < 1) lvy = 0;
         slowly();
 	}
 	protected void slowly()
 	{
 		lvx *= 0.9;
+		lvy *= 0.9;
 	}
 	protected void updateCoord()
 	{
@@ -372,7 +374,7 @@ public class Entity {
 				int y = w*world.BLOCK_SIZE;
 				if(b == 127)
 				{
-					new Character().init(x, y, world);
+					new SnakeHead().init(x, y, world);
 					continue;
 				}
 				else if(b == 126)
@@ -432,6 +434,8 @@ public class Entity {
 	}
 	public long getX() {return x + getWidth()/2;}
 	public long getY() {return y + getHeight()/2;}
+	protected void setX(long x) {this.x = x - getWidth()/2;}
+	protected void setY(long y) {this.y = y - getHeight()/2;}
 	
 	public double getLVX() {return lvx;}
 	public double getLVY() {return lvy;}

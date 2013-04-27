@@ -1,67 +1,65 @@
-package entity.mob;
+package entity.mob.snake;
 
 import java.awt.Graphics2D;
 
 import main.Game;
 import main.Pictures;
 import main.World;
-import GUI.GUI;
-import entity.mob.controllers.Group;
+import entity.Entity;
+import entity.mob.Mob;
+import entity.mob.controllers.Controller;
 
-public class Character extends Mob
+public class SnakePart extends Mob
 {
 //	public int cooldownAfterDamage;
-	private GUI control;
+
+	protected SnakePart frontPart;
+	protected SnakePart backPart;
+	protected double angle;
 	
+	public Entity init(long x, long y, double lvx, double lvy, double gvx, double gvy, World world, SnakePart nextPart)
+	{
+		this.frontPart = nextPart;
+		frontPart.setBackPart(this);
+		return super.init(x, y, lvx, lvy, gvx, gvy, world);
+	}
+	private void setBackPart(SnakePart backPart)
+	{
+		this.backPart = backPart; 
+	}
+
 	@Override
-	public void finalInit(World world)
+	protected void finalInit(World world)
 	{
 		super.finalInit(world);
-		super.control = new GUI(this, Game.getInput());
-		control = (GUI) super.control;
-		Game.setGUI((GUI)control);
-		
-		group.removeMob(this);
-		Group.character.addMob(this);
-		group = Group.character;
+		control = new Controller(this);
 	}
 	
 	@Override
 	public void damage(int damage, int knockback, double dir)
 	{
-//		if(cooldownAfterDamage>0) return;
-//		super.damage(damage, knockback, dir);
-//		cooldownAfterDamage = 12;
+		super.damage(damage, 0, dir);
 	}
-	
-//    @Override
-//    public void tick()
-//    {
-//    	super.tick();
-////	    cooldownAfterDamage--;
-//    	
-//    	for(int q=0;q<10;q++)
-//    	{
-//    		double angle = Math.PI*2*Math.random();
-//    		double persent = Math.random();
-//    		long sx = (long) (x+(Math.cos(angle)*persent+1)*getWidth()/2);
-//    		long sy = (long) (y+(Math.sin(angle)*persent+1)*getHeight()/2);
-//    		new Spark(sx, sy, world);
-//    	}
-//    	
-//    	if(Math.random()>0.99)
-//    	{
-//    		double angle = Math.PI*2*Math.random();
-//    		long wx = (long) (x+getWidth()/2+(Math.cos(angle))*getWidth()*5);
-//    		long wy = (long) (y+getHeight()/2+(Math.sin(angle))*getHeight()*5);
-//    		new Wind(wx, wy, world);
-//    	}
-//    }
     @Override
-    public void onUp() 
+    public void tick()
     {
-    	super.onUp();
-    	lvy-=0.7;
+    	super.tick();
+
+//    	if(frontPart == null) return;
+//    	if(backPart == null) return;
+//    	
+//    	double dx = frontPart.getX() - backPart.getX();
+//    	double dy = frontPart.getY() - backPart.getY();
+//    	
+//    	angle = getAngle(dx, dy) - Math.PI/2;
+//    	
+//    	double r2 = (frontPart.getX()-getX())*(frontPart.getX()-getX()) + (frontPart.getY()-getY())*(frontPart.getY()-getY());
+//    	
+//    	if(getWidth()*getWidth() < r2)
+//    	{
+//    		setX((long) (frontPart.getX() + getWidth()*Math.cos(angle)));
+//    		setY((long) (frontPart.getY() + getWidth()*Math.sin(angle)));
+//    	}
     }
     
     @Override
@@ -99,13 +97,13 @@ public class Character extends Mob
     @Override
 	public double getSpeed()
 	{
-		return 9;
+		return 15;
 	}
-    @Override
-	public double getJumpPower()
-	{
-		return 13;
-	}
+//    @Override
+//	public double getJumpPower()
+//	{
+//		return 13;
+//	}
     @Override
 	public int getMaxHP()
 	{
@@ -126,14 +124,14 @@ public class Character extends Mob
 	{
 		return 0;
 	}
-	@Override
+    @Override
 	public int getWidth()
 	{
-		return width;
+		return 20;
 	}
 	@Override
 	public int getHeight()
 	{
-		return height;
+		return 20;
 	}
 }
