@@ -4,6 +4,7 @@ import items.Item;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.io.IOException;
 
 import main.Game;
 import main.Input;
@@ -43,6 +44,14 @@ public class GUI extends Controller
         //throw item
         if(input.q.typed)
         {
+        	try
+			{
+				Game.finishLevel();
+			} catch (IOException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 //        	if(leftHand!=null)
 //        	{
 //		    	leftHand.throwItem();

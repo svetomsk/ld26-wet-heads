@@ -22,14 +22,14 @@ class Level_complete extends JFrame
         this.n = n;
         setSize(width, height);
         setLayout(new FlowLayout());
-        setUndecorated(true);
+        setUndecorated(false);
         setLocationRelativeTo(null);
         initializeButton();
         initializePicture();
         setListeners();
-        
         setAlwaysOnTop(true);
         setVisible(true);
+//        repaint();
     }
 
     @Override

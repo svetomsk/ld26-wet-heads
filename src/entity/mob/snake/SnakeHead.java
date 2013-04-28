@@ -61,9 +61,12 @@ public class SnakeHead extends SnakePart
 //		cooldownAfterDamage = 12;
 	}
 	
+	private double criticalAngle = Math.PI/4; 
+	
 	@Override
 	public void onLeft()
 	{
+//		if(getAngle(getX() - backPart.getX(), getY() - backPart.getY())-criticalAngle)
 		angle -= Math.PI/40;
 	}
 	@Override
@@ -97,7 +100,7 @@ public class SnakeHead extends SnakePart
 //		double angle = getAngle(lvx, lvy);
 		  
 		g.rotate(angle-Math.PI/2, drawx, drawy);
-		g.drawImage(img, drawx-img.getWidth(null)/2, drawy-img.getHeight(null)/2, null);
+		g.drawImage(img, drawx-img.getWidth(null)/2, drawy-img.getHeight(null)/4, null);
 		g.rotate(-angle+Math.PI/2, drawx, drawy);
         
 //        double angle = getAngle(control.getX()-drawx, control.getY()-drawy)+Math.PI/2;

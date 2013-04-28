@@ -41,7 +41,7 @@ public class Pictures
             level1 = ImageIO.read(new File("resources/level1.png"));
             
             complete_first = new Image[3];
-            complete_first[0] = ImageIO.read(new File("resources/level2.png"));
+            complete_first[0] = ImageIO.read(new File("resources/level1_complete.png"));
             
             Canvas s = new Canvas();
             
@@ -53,6 +53,9 @@ public class Pictures
             aasf = new AreaAveragingScaleFilter(1280, 1280);
             level1= s.createImage(new FilteredImageSource(level1.getSource(), aasf));
             
+            aasf = new AreaAveragingScaleFilter(240, 320);
+            complete_first[0] = s.createImage(new FilteredImageSource(complete_first[0].getSource(), aasf));
+            
             aasf = new AreaAveragingScaleFilter(32, 32);
             bodysnake = s.createImage(new FilteredImageSource(bodysnake.getSource(), aasf));
             
@@ -62,8 +65,10 @@ public class Pictures
             aasf = new AreaAveragingScaleFilter(64, 64);
             headsnake = s.createImage(new FilteredImageSource(headsnake.getSource(), aasf));
             
-        } catch (IOException ex) {
-            Logger.getLogger(Pictures.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) 
+        {
+        	ex.printStackTrace();
+//            Logger.getLogger(Pictures.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     public static Image[] loadAndCut(String name, int sw, int scale) 
