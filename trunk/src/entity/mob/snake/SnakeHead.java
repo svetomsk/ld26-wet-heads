@@ -8,10 +8,19 @@ import main.Pictures;
 import main.World;
 import GUI.GUI;
 import entity.mob.controllers.Group;
+import entity.mob.snake.weapon.RocketLauncher;
+import entity.mob.snake.weapon.Weapon;
 
 public class SnakeHead extends SnakePart
 {
-//	public int cooldownAfterDamage;
+	
+	private Weapon wep;
+	
+	public Weapon getWep()
+	{
+		return wep;
+	}
+	
 	private GUI control;
 	private double v = 0;
 	private double angle = Math.PI;
@@ -25,6 +34,10 @@ public class SnakeHead extends SnakePart
 		super.control = new GUI(this, Game.getInput());
 		control = (GUI) super.control;
 		Game.setGUI((GUI)control);
+		
+		
+		wep = new RocketLauncher().init(getX(), getY(), 0, 0, 0, 0, world, this);
+		
 		
 		group.removeMob(this);
 		Group.character.addMob(this);
@@ -67,12 +80,12 @@ public class SnakeHead extends SnakePart
 	public void onLeft()
 	{
 //		if(getAngle(getX() - backPart.getX(), getY() - backPart.getY())-criticalAngle)
-		angle -= Math.PI/50;
+		angle -= Math.PI/40;
 	}
 	@Override
 	public void onRight()
 	{
-		angle += Math.PI/50;
+		angle += Math.PI/40;
 	}
 	
     @Override
@@ -115,6 +128,7 @@ public class SnakeHead extends SnakePart
         
 //        super.draw(g);
 //        drawHealth(g);
+//		drawBounds(g);
     }
     @Override
 	public double getSpeed()
@@ -145,6 +159,10 @@ public class SnakeHead extends SnakePart
 	public double getStrength()
 	{
 		return 0;
+	}
+    public double getAngle()
+	{
+		return angle;
 	}
 
     private int satiety = 0;

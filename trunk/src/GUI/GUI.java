@@ -47,7 +47,7 @@ public class GUI extends Controller
         //throw item
         if(input.space.typed)
         {
-        	mob.feed();
+        	mob.getWep().use();
         }
         if(input.q.typed)
         {

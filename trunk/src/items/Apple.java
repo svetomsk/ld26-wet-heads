@@ -22,7 +22,7 @@ public class Apple extends Item{
 	@Override
 	protected void initPictures()
 	{
-		img = Pictures.blood;
+		img = Pictures.apple;
 	}
 	
 	@Override
@@ -39,5 +39,17 @@ public class Apple extends Item{
 		int drawx = (int) (getX()-Game.x);
     	int drawy = (int) (getY()-Game.y);
 		g.drawImage(img, drawx-img.getWidth(null)/2, drawy-img.getHeight(null)/2, null);
+//		drawBounds(g);
+	}
+	
+	@Override
+	public int getWidth()
+	{
+		return 32;
+	}
+	@Override
+	public int getHeight()
+	{
+		return 32;
 	}
 }

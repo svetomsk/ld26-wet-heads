@@ -27,6 +27,8 @@ public class Pictures
     public static Image tailsnake;
     public static Image headsnake;
     
+    public static Image apple;
+    
     public Pictures()
     {
         try 
@@ -37,7 +39,9 @@ public class Pictures
         	tailsnake = ImageIO.read(new File("resources/tailsnake.png"));
         	headsnake = ImageIO.read(new File("resources/headsnake.png"));
             
-            blood = ImageIO.read(new File("resources/blood.png"));
+        	blood = ImageIO.read(new File("resources/blood.png"));
+        	
+        	apple = ImageIO.read(new File("resources/apple.png"));
             
             level = new Image[3];
             level[0] = ImageIO.read(new File("resources/level1.png"));
@@ -53,6 +57,9 @@ public class Pictures
             
             aasf = new AreaAveragingScaleFilter(12, 12);
             blood= s.createImage(new FilteredImageSource(blood.getSource(), aasf));
+            
+            aasf = new AreaAveragingScaleFilter(64, 64);
+            apple = s.createImage(new FilteredImageSource(apple.getSource(), aasf));
             
             aasf = new AreaAveragingScaleFilter(5130, 2550);
             level[0] = s.createImage(new FilteredImageSource(level[0].getSource(), aasf));
