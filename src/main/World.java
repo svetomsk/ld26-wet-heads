@@ -82,8 +82,8 @@ public class World
 	{
 //		while(true)
 //		{
-			int x = (int) (islands.get(0).blocks.length*BLOCK_SIZE*Math.random());
-			int y = (int) (islands.get(0).blocks[0].length*BLOCK_SIZE*Math.random());
+			int x = (int) (islands.get(0).blocks.length*BLOCK_SIZE* (1/8+6*Math.random()/8) );
+			int y = (int) (islands.get(0).blocks[0].length*BLOCK_SIZE* (1/8+6*Math.random()/8) );
 			
 			entity.init(x, y, this);
 //		}
@@ -91,11 +91,6 @@ public class World
 	
 	public void step()
 	{
-		if(apple_quantity <= 2)
-		{
-			spawn(new Apple());
-			apple_quantity++;
-		}
 		
 		for (int q = 0; q < entities.size(); q++)
 		{
@@ -141,6 +136,11 @@ public class World
 				particles.get(q).interactOn(particles.get(w));
 				particles.get(w).interactOn(particles.get(q));
 			}
+		}
+		if(apple_quantity <= 2)
+		{
+			spawn(new Apple());
+			apple_quantity++;
 		}
 
 //        for(int q=0;q<islands.size();q++)

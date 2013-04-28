@@ -26,6 +26,9 @@ public class SnakePart extends Mob
 		frontPart.setBackPart(this);
 		return super.init(x, y, lvx, lvy, gvx, gvy, world);
 	}
+	
+	
+	
 	protected void setBackPart(SnakePart backPart)
 	{
 		this.backPart = backPart; 
@@ -153,11 +156,11 @@ public class SnakePart extends Mob
     @Override
 	public int getWidth()
 	{
-		return 32;
+		return 64;
 	}
 	@Override
 	public int getHeight()
 	{
-		return 32;
+		return 64;
 	}
 }
