@@ -110,6 +110,7 @@ public class Entity {
 	}
 	protected void animationTick()
 	{
+		if(img == null) return;
 		subFrame++;
 		if(subFrame>=3)
 		{
@@ -331,12 +332,14 @@ public class Entity {
 	{
 //		if(mob instanceof Character) return interactOnCharacter((Character) mob);
 		if(mob instanceof Chest) return interactOnChest((Chest) mob);
+		if(mob instanceof SnakeHead) return interactOnSnakeHead((SnakeHead) mob);
 		
 		return true;
 	}
 	
 	protected boolean interactOnCharacter(Character character){return true;}
 	protected boolean interactOnChest(Chest chest){return true;}
+	protected boolean interactOnSnakeHead(SnakeHead snakeHead){return true;}
 	
 	protected boolean interactOnItem(Item item){return true;}
 	

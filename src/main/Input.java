@@ -51,7 +51,7 @@ public class Input
 	public boolean lmbReleased;
 	public boolean rmbReleased;
 	public boolean wheelReleased;
-
+	
 	public String typed = "";
 
 	private List<Key> keys = new ArrayList<Key>();

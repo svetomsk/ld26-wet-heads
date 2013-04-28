@@ -30,6 +30,10 @@ public class SnakePart extends Mob
 	{
 		this.backPart = backPart; 
 	}
+	protected void setFrontPart(SnakePart frontPart)
+	{
+		this.frontPart = frontPart; 
+	}
 
 	@Override
 	protected void finalInit(World world)

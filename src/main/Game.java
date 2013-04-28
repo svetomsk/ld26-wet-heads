@@ -10,13 +10,9 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
-import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.logging.Level;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.BoxLayout;
@@ -30,8 +26,28 @@ import GUI.GUI;
 
 public class Game extends Canvas implements Runnable
 {
-    public static int WIDTH;
-    public static int HEIGHT;   
+	
+    public static int basicWIDTH;
+    public static int basicHEIGHT;
+    
+    public static double scale = 1;
+    public static double perfectScale = 1;
+    
+    public static int WIDTH = (int) (basicHEIGHT*scale);
+    public static int HEIGHT = (int) (basicWIDTH*scale);
+    
+    private static void onScaleChanged()
+    {
+    	HEIGHT = (int) (basicHEIGHT*scale);
+    	WIDTH = (int) (basicWIDTH*scale);
+    }
+
+    public static void scale(double value)
+    {
+    	perfectScale += value/10;
+    	onScaleChanged();
+    }
+    
     public static final int SIZE = 1;
     
     public String frames = "";
@@ -137,6 +153,10 @@ public class Game extends Canvas implements Runnable
 	            physFrames++;
         	}
             swap();
+
+            scale += (perfectScale - scale)/40;
+            onScaleChanged();
+            
             TrackList.update();
             frames++;
             if(System.currentTimeMillis() > lastTimeFrame + 1000)
@@ -182,12 +202,14 @@ public class Game extends Canvas implements Runnable
                 return;            
             }
             Graphics2D g =(Graphics2D) bs.getDrawGraphics();
+            
+            g.scale(1/scale, 1/scale);
+            
             g.setColor(Color.WHITE);
-            g.fillRect(0, 0, getWidth(), getHeight());
+            g.fillRect(0, 0, WIDTH, HEIGHT);
             
             world.draw(g);
             gui.draw(g);
-            PrintString.drawPrinting(g);
             
 //            g.setColor(new Color((float)(1-world.character.hp), (float)world.character.hp, (float)0.0));
 //            g.fillRect(32, 32, (int)(world.character.hp * WIDTH/3), 8);
@@ -195,6 +217,10 @@ public class Game extends Canvas implements Runnable
             g.setColor(Color.GRAY);
             g.drawString(frames, WIDTH - frames.length() * 12, 12);
 
+            g.scale(2, 2);
+            
+            PrintString.drawPrinting(g);
+            
             g.dispose();
             bs.show();
         }
@@ -255,6 +281,7 @@ public class Game extends Canvas implements Runnable
     public static void finishLevel() throws IOException
     {
         Level_complete complete = new Level_complete(levelNumber);
+        complete.invalidate();
     	//Congrats.levelFinished(levelNumber);    	
     }
     
@@ -276,8 +303,8 @@ public class Game extends Canvas implements Runnable
         menu = new JPanel();
         menu.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
         int bheight = 70;
-        int bwidth = 3*WIDTH/5;
-        int range = (Toolkit.getDefaultToolkit().getScreenSize().height - 4 * bheight)/5;
+        int bwidth = 3*basicWIDTH/5;
+        int range = (basicHEIGHT - 4 * bheight)/5;
         menu.setLayout(new FlowLayout(FlowLayout.CENTER, 100, range));
 //        JButton contin = new JButton("Continue");
         JButton start = new JButton("Start");
@@ -491,8 +518,11 @@ public class Game extends Canvas implements Runnable
     public static void main(String [] args)
     {
     	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    	WIDTH = (int) screenSize.getWidth();
-    	HEIGHT = (int) screenSize.getHeight();
+    	
+    	scale = 1;
+    	WIDTH = basicWIDTH = (int) screenSize.getWidth();
+    	HEIGHT = basicHEIGHT = (int) screenSize.getHeight();
+    	
         frame = new JFrame("Game");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);        
         gameComponents = new Game(screenSize);
