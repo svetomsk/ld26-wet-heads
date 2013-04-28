@@ -18,7 +18,7 @@ public class SnakePart extends Mob
 	protected SnakePart backPart;
 	protected double angle;
 	
-	protected int segment_gap = 24;
+	protected int segment_gap = 20;
 	
 	public Entity init(long x, long y, double lvx, double lvy, double gvx, double gvy, World world, SnakePart nextPart)
 	{

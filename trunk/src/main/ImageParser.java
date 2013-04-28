@@ -41,7 +41,7 @@ public class ImageParser
 			image = ImageIO.read(new File(filename));
 		} catch (IOException ex)
 		{
-			System.out.println(ex);
+			ex.printStackTrace();
 		}
 
 		int width = image.getWidth();
