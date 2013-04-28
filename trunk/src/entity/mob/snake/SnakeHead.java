@@ -31,7 +31,7 @@ public class SnakeHead extends SnakePart
 		group = Group.character;
 		
 		body.add((SnakePart) new SnakePart().init(getX()+getWidth(), getY(), 0, 0, 0, 0, world, this));
-		for(int q=0;q<32;q++)
+		for(int q=0;q<4;q++)
 		{
 			SnakePart part = body.get(body.size()-1);
 			body.add((SnakePart) new SnakePart().init(part.getX()+part.getWidth(), part.getY()-part.getHeight()/2, 0, 0, 0, 0, world, part));
@@ -67,12 +67,12 @@ public class SnakeHead extends SnakePart
 	public void onLeft()
 	{
 //		if(getAngle(getX() - backPart.getX(), getY() - backPart.getY())-criticalAngle)
-		angle -= Math.PI/40;
+		angle -= Math.PI/50;
 	}
 	@Override
 	public void onRight()
 	{
-		angle += Math.PI/40;
+		angle += Math.PI/50;
 	}
 	
     @Override
@@ -83,7 +83,8 @@ public class SnakeHead extends SnakePart
     @Override
 	public void onDown()
 	{
-    	v--;
+//    	if(v>0)
+//    	v--;
 	}
     
     @Override
@@ -118,7 +119,7 @@ public class SnakeHead extends SnakePart
     @Override
 	public double getSpeed()
 	{
-		return 16;
+		return 10;
 	}
 //    @Override
 //	public double getJumpPower()
@@ -144,5 +145,35 @@ public class SnakeHead extends SnakePart
 	public double getStrength()
 	{
 		return 0;
+	}
+
+    private int satiety = 0;
+	public void feed()
+	{
+		satiety++;
+		addBody();
+	}
+	
+	private void addBody()
+	{
+		SnakePart nbp = new SnakePart();
+		SnakeTail tail = (SnakeTail) body.get(body.size()-1);
+		SnakePart bp = body.get(body.size()-2); 
+		
+		body.remove(body.size()-1);
+		
+		nbp.init(tail.getX(), tail.getY(), 0, 0, 0, 0, world, bp);
+		nbp.setFrontPart(bp);
+		nbp.setBackPart(tail);
+		bp.setBackPart(nbp);
+		body.add(nbp);
+		
+		tail.setFrontPart(nbp);
+		body.add(tail);
+	}
+
+	public int getSatiety()
+	{
+		return satiety;
 	}
 }

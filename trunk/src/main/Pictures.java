@@ -18,10 +18,10 @@ public class Pictures
     
     public static Image roll[] = loadAndCut("resources/roll.png", 6, 256);
     public static Image chest[] = loadAndCut("resources/chest.png", 6, 32);
-    public static Image complete_first[];
+    public static Image complete_level[];
     public static Image blood;
     
-    public static Image level1;
+    public static Image level[];
 
     public static Image bodysnake;
     public static Image tailsnake;
@@ -38,10 +38,14 @@ public class Pictures
         	headsnake = ImageIO.read(new File("resources/headsnake.png"));
             
             blood = ImageIO.read(new File("resources/blood.png"));
-            level1 = ImageIO.read(new File("resources/level1.png"));
             
-            complete_first = new Image[3];
-            complete_first[0] = ImageIO.read(new File("resources/level1_complete.png"));
+            level = new Image[3];
+            level[0] = ImageIO.read(new File("resources/level1.png"));
+            level[1] = ImageIO.read(new File("resources/level2.png"));
+            
+            complete_level = new Image[3];
+            complete_level[0] = ImageIO.read(new File("resources/level1_complete.png"));
+            complete_level[1] = ImageIO.read(new File("resources/level1_complete.png"));
             
             Canvas s = new Canvas();
             
@@ -50,11 +54,14 @@ public class Pictures
             aasf = new AreaAveragingScaleFilter(12, 12);
             blood= s.createImage(new FilteredImageSource(blood.getSource(), aasf));
             
-            aasf = new AreaAveragingScaleFilter(1280, 1280);
-            level1= s.createImage(new FilteredImageSource(level1.getSource(), aasf));
+            aasf = new AreaAveragingScaleFilter(5130, 2550);
+            level[0] = s.createImage(new FilteredImageSource(level[0].getSource(), aasf));
+            
+            aasf = new AreaAveragingScaleFilter(5090, 2540);
+            level[1] = s.createImage(new FilteredImageSource(level[1].getSource(), aasf));
             
             aasf = new AreaAveragingScaleFilter(240, 320);
-            complete_first[0] = s.createImage(new FilteredImageSource(complete_first[0].getSource(), aasf));
+            complete_level[0] = s.createImage(new FilteredImageSource(complete_level[0].getSource(), aasf));
             
             aasf = new AreaAveragingScaleFilter(32, 32);
             bodysnake = s.createImage(new FilteredImageSource(bodysnake.getSource(), aasf));

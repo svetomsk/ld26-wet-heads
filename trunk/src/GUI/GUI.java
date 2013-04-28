@@ -12,6 +12,7 @@ import main.Pictures;
 import entity.mob.Angel;
 import entity.mob.Mob;
 import entity.mob.controllers.Controller;
+import entity.mob.snake.SnakeHead;
 
 public class GUI extends Controller
 {
@@ -19,10 +20,12 @@ public class GUI extends Controller
 	public boolean stepState = true;
 	private Item leftHand;
 	
+	private SnakeHead mob;
+	
 	public GUI(Mob mob, Input input) {
 		super(mob);
 		this.input = input;
-		
+		this.mob = (SnakeHead) mob;
 //		leftHand = new SwordItem(mob);
 	}	
 	@Override
@@ -42,6 +45,10 @@ public class GUI extends Controller
 //        }
         
         //throw item
+        if(input.space.typed)
+        {
+        	mob.feed();
+        }
         if(input.q.typed)
         {
         	try

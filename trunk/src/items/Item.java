@@ -23,18 +23,19 @@ public class Item extends Entity{
 	private int width = 16;
 	protected Mob owner;
 	
-	public Entity init(long x, long y, World world)
+	@Override
+	public Item init(long x, long y, World world)
 	{
 		return init(x, y, null, world);
 	}
-	public Entity init(Mob owner)
+	public Item init(Mob owner)
 	{
 		return init(0, 0, owner, owner.getWorld());
 	}
-	public Entity init(long x, long y, Mob owner, World world)
+	public Item init(long x, long y, Mob owner, World world)
 	{
 		this.owner = owner;
-		return super.init(x, y, world);
+		return (Item) super.init(x, y, world);
 	}
 	@Override
 	public void save(DataOutputStream os) throws IOException

@@ -7,7 +7,7 @@ import block.Block;
 
 public class Island {
 
-	private Image map = Pictures.level1; 
+	private Image map; 
 	
 	public byte[][] blocks;
 	private double vx, vy;
@@ -16,9 +16,10 @@ public class Island {
 	
 	//ATTENTION! -12<=v<=12 only
 	
-	public Island(long x, long y, double vx, double vy, World world, byte[][] mas)
+	public Island(long x, long y, double vx, double vy, World world, byte[][] mas, Image map)
 	{
 //		blocks = mas;
+		this.map = map;
 		blocks = Block.parse(mas);
 		this.x = x;
 		this.y = y;

@@ -22,19 +22,20 @@ class Level_complete extends JFrame
         this.n = n;
         setSize(width, height);
         setLayout(new FlowLayout());
-        setUndecorated(false);
+        setUndecorated(true);
         setLocationRelativeTo(null);
         initializeButton();
         initializePicture();
         setListeners();
+        
         setAlwaysOnTop(true);
         setVisible(true);
-//        repaint();
     }
 
     @Override
     public void paint(Graphics g)
     {
+    	super.paint(g);
         g.drawImage(current, 0, 0, width, height, this);
     }   
     
@@ -57,7 +58,7 @@ class Level_complete extends JFrame
     
     private void initializePicture() throws IOException
     {       
-        current = Pictures.complete_first[n];      
+        current = Pictures.complete_level[n-1];      
     }    
     
     private void setListeners()

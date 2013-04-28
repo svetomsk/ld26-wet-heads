@@ -1,5 +1,7 @@
 package main;
 
+import items.Apple;
+
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -39,17 +41,19 @@ public class World
 		islands = new ArrayList<Island>();
 		entities = new ArrayList<Entity>();
 		particles = new ArrayList<Particle>();
+		apple_quantity = 0;
 	}
 
 	public void createLevel(int n)
 	{
+		clear();
 		parseInput(n);
 	}
 
 	private void parseInput(int n)
 	{
 		byte[][] arr = ImageParser.parseBlocks("resources/level"+n+"_phys.png");
-		new Island(0, 0, 0, 0, this, arr);
+		new Island(0, 0, 0, 0, this, arr, Pictures.level[n-1]);
 		parseInputForEntities();
 	}
 
@@ -72,8 +76,27 @@ public class World
 		return character;
 	}
 
+	public int apple_quantity = 0;
+	
+	private void spawn(Entity entity)
+	{
+//		while(true)
+//		{
+			int x = (int) (islands.get(0).blocks.length*BLOCK_SIZE*Math.random());
+			int y = (int) (islands.get(0).blocks[0].length*BLOCK_SIZE*Math.random());
+			
+			entity.init(x, y, this);
+//		}
+	}
+	
 	public void step()
 	{
+		if(apple_quantity <= 2)
+		{
+			spawn(new Apple());
+			apple_quantity++;
+		}
+		
 		for (int q = 0; q < entities.size(); q++)
 		{
 			Entity e = entities.get(q);
