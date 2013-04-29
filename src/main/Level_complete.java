@@ -40,7 +40,12 @@ class Level_complete extends JFrame
     private void initializePicture() throws IOException
     {       
         current = Pictures.complete_level[n-1];      
-    }    
+    }   
+    
+    void close()
+    {
+        setVisible(false);
+    }
     
     private void setListeners()
     {
@@ -50,7 +55,8 @@ class Level_complete extends JFrame
             @Override
             public void mouseClicked(MouseEvent e) 
             {
-                Game.nextLevel();
+                close();
+                Game.nextLevel();                
             }            
         }
         );
