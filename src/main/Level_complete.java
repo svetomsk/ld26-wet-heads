@@ -56,7 +56,7 @@ class Level_complete extends JFrame
             public void mouseClicked(MouseEvent e) 
             {
                 close();
-                Game.nextLevel();                
+                Game.nextLevel();
             }            
         }
         );
