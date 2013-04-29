@@ -2,6 +2,7 @@ package level.simple;
 
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.util.Random;
@@ -34,6 +35,7 @@ public class Level
     
     static public void init(int w, int h, Input input)
     {
+        vector = 0;
         Level.input = input;        
         width = w; height = h;
         size = height/n;
@@ -77,6 +79,10 @@ public class Level
         {
             g.fillRect(p.x * size, p.y * size, size, size);
         }
+        
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("Score", Font.BOLD, 30));
+        g.drawString("SCORE " + (Snake.length * 10), size, size* 3/4);
         g.setColor(apple);
         g.fillRect(applex * size, appley * size, size, size);
     }

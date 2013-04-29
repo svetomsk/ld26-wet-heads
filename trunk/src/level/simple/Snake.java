@@ -23,10 +23,13 @@ class Snake
     
     static void fillField()
     {
-        for(Point p : body)
+        try
         {
-            Level.field[p.y][p.x] = 2;
-        }
+            for(Point p : body)
+            {
+                Level.field[p.y][p.x] = 2;
+            }
+        }catch(Exception e) {};
     }
     
     static public void moveUp()
@@ -59,7 +62,16 @@ class Snake
     
     static private void removeTail()
     {
-        body.remove(body.size() - 1);
+        boolean c = false;
+        while(!c)
+            try
+            {
+                c = true;
+                body.remove(body.size() - 1);
+            }catch(Exception e)
+            {
+                c = false;
+            }
     }
     
     static private void add()
