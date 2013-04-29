@@ -38,7 +38,7 @@ public class Boom extends Entity
 	@Override
 	protected boolean interactOnMob(Mob mob)
 	{
-		mob.damage(10, 0, 0);
+		mob.damage(30, 0, 0);
 		return true;
 	}
 	

@@ -59,6 +59,28 @@ public class Enemy extends Mob
 		}
 	}	
     @Override
+    public void onDeath() 
+    {
+    	super.onDeath();
+    	quantity--;
+    }
+    private static int quantity = 0;
+    @Override
+    public void feed() 
+    {
+    	super.feed();
+    	
+    	if(quantity<100)
+    	{
+    		quantity+=5;
+    		new Enemy().init(x, y, world);
+    		new Enemy().init(x, y, world);
+    		new Enemy().init(x, y, world);
+    		new Enemy().init(x, y, world);
+    		new Enemy().init(x, y, world);
+    	}
+    }
+    @Override
     protected void initPictures() 
     {
     	img = Pictures.chest;

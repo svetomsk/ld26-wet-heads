@@ -39,6 +39,8 @@ public class SnakeHead extends SnakePart
 		Group.character.addMob(this);
 		group = Group.character;
 		
+		head = this;
+		
 		body.add((SnakePart) new SnakePart().init(getCX()+getWidth(), getCY(), 0, 0, 0, 0, world, this));
 		for(int q=0;q<8;q++)
 		{

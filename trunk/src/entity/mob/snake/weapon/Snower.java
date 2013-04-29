@@ -14,7 +14,7 @@ public class Snower extends Weapon
 	private static int cooldown = 60;
 	private int currentCooldown = 60;
 	
-	private static double rocketSpeed = 16;
+	private static double rocketSpeed = 24;
 	
 	@Override
 	public void use(double angle)

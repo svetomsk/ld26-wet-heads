@@ -11,13 +11,21 @@ public class Snow extends Shell
 {
 	private Image img;
 	
+	private int charge = 150;
+	
 	@Override
 	protected boolean interactOnMob(Mob mob)
 	{
 		if(mob.getGroup() != owner.getGroup())
 		{
+			charge--;
+			
+			if(charge < 0)
+			{
+				delete();
+				return true;
+			}
 			mob.damage(100, 0, 0);
-			delete();
 		}
 		return super.interactOnMob(mob);
 	}
@@ -25,7 +33,6 @@ public class Snow extends Shell
 	@Override
 	protected void interactOn(byte id)
 	{
-		delete();
 	}
 	
     @Override

@@ -54,7 +54,7 @@ public class GUI extends Controller
         }
         
         //throw item
-        if(input.lmbClicked)
+        if(input.lmb)
         {
         	try
         	{
