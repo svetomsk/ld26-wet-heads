@@ -41,30 +41,44 @@ public class SnakeHead extends SnakePart
 		Group.character.addMob(this);
 		group = Group.character;
 		
-		body.add((SnakePart) new SnakePart().init(getX()+getWidth(), getY(), 0, 0, 0, 0, world, this));
+		body.add((SnakePart) new SnakePart().init(get—X()+getWidth(), get—Y(), 0, 0, 0, 0, world, this));
 		for(int q=0;q<9;q++)
 		{
 			SnakePart part = body.get(body.size()-1);
-			body.add((SnakePart) new SnakePart().init(part.getX()+part.getWidth(), part.getY()-part.getHeight()/2, 0, 0, 0, 0, world, part));
+			body.add((SnakePart) new SnakePart().init(part.get—X()+part.getWidth(), part.get—Y()-part.getHeight()/2, 0, 0, 0, 0, world, part));
 		}
 		SnakePart part = body.get(body.size()-1);
-		body.add((SnakePart) new SnakeTail().init(part.getX()+part.getWidth(), part.getY(), 0, 0, 0, 0, world, part));
+		body.add((SnakePart) new SnakeTail().init(part.get—X()+part.getWidth(), part.get—Y(), 0, 0, 0, 0, world, part));
 		
 		v = 9;
 	}
 	
+	private boolean speedUp = false;
+	
 	@Override
 	public void tick()
 	{
+		v++;
+		slowly();
+		
+		speedUp = false;
+		super.tick();
+		
 		lvx = v*Math.cos(angle);
 		lvy = v*Math.sin(angle);
-		super.tick();
 	}
-//	@Override
-//	protected void slowly()
-//	{
-//		v *= getSpeed()/(getSpeed()+1);
-//	}
+	@Override
+	protected void slowly()
+	{
+		v *= getSpeed()/(getSpeed()+1);
+	}
+	@Override
+	public void onUp() 
+	{
+		super.onUp();
+		v++;
+		speedUp = true;
+	}
 	
 	private double criticalAngle = Math.PI/4; 
 	
@@ -72,12 +86,24 @@ public class SnakeHead extends SnakePart
 	public void onLeft()
 	{
 //		if(getAngle(getX() - backPart.getX(), getY() - backPart.getY())-criticalAngle)
-		angle -= Math.PI/40;
+		int k;
+		if(speedUp)
+		{
+			k = 70;
+		}
+		else k = 40;
+		angle -= Math.PI/k;
 	}
 	@Override
 	public void onRight()
 	{
-		angle += Math.PI/40;
+		int k;
+		if(speedUp)
+		{
+			k = 70;
+		}
+		else k = 40;
+		angle += Math.PI/k;
 	}
 
     @Override
@@ -85,9 +111,9 @@ public class SnakeHead extends SnakePart
 	{	
 		if(damage == 0) return;
 		hp -= Math.max(damage - getStrength(), 0);
-		for(int q=0;q<7;q++)
+		for(int q=0;q<1;q++)
 		{
-			new Blood(getX(), getY(), world);
+			new Blood(get—X(), get—Y(), world);
 		}
 	}	
     @Override
@@ -98,32 +124,20 @@ public class SnakeHead extends SnakePart
     @Override
     public void draw(Graphics2D g)
     {
-    	int drawx = (int) (getX()-Game.x);
-    	int drawy = (int) (getY()-Game.y);
-
-//		double angle = getAngle(lvx, lvy);
+    	int drawx = (int) (get—X()-Game.x);
+    	int drawy = (int) (get—Y()-Game.y);
 		  
-		g.rotate(angle-Math.PI/2, drawx, drawy);
-		g.drawImage(img, drawx-img.getWidth(null)/2, drawy-img.getHeight(null)/4, null);
-		g.rotate(-angle+Math.PI/2, drawx, drawy);
+		g.rotate(angle+Math.PI/2, drawx, drawy);
+		g.drawImage(img, drawx-img.getWidth(null)/2, drawy-3*img.getHeight(null)/4, null);
+		g.rotate(-angle-Math.PI/2, drawx, drawy);
         
-//        double angle = getAngle(control.getX()-drawx, control.getY()-drawy)+Math.PI/2;
-        
-//        Image eye = control.getX()-drawx >= 0 ? Pictures.eye_right : Pictures.eye_left;
-//        if(control.getX()-drawx < 0 ) angle -= Math.PI;
-//        
-//        g.rotate(angle, drawx, drawy);
-//        g.drawImage(eye, drawx-width/2, drawy-height/2, null);
-//        g.rotate(-angle, drawx, drawy);
-        
-//        super.draw(g);
-        drawHealth(g);
 //		drawBounds(g);
+		drawHealth(g);
     }
     @Override
 	public double getSpeed()
 	{
-		return 10;
+		return 16;
 	}
 //    @Override
 //	public double getJumpPower()
@@ -159,6 +173,11 @@ public class SnakeHead extends SnakePart
 	public void feed()
 	{
 		satiety++;
+		hp += 1000;
+		if(hp > getMaxHP())
+		{
+			hp = getMaxHP();
+		}
 		addBody();
 	}
 	
@@ -170,7 +189,7 @@ public class SnakeHead extends SnakePart
 		
 		body.remove(body.size()-1);
 		
-		nbp.init(tail.getX(), tail.getY(), 0, 0, 0, 0, world, bp);
+		nbp.init(tail.get—X(), tail.get—Y(), 0, 0, 0, 0, world, bp);
 		nbp.setFrontPart(bp);
 		nbp.setBackPart(tail);
 		bp.setBackPart(nbp);
@@ -187,6 +206,6 @@ public class SnakeHead extends SnakePart
 
 	public void setNewWeapon(Weapon wep)
 	{
-		this.wep = wep.init(getX(), getY(), 0, 0, 0, 0, world, this);
+		this.wep = wep.init(get—X(), get—Y(), 0, 0, 0, 0, world, this);
 	}
 }

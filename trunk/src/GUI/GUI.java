@@ -17,7 +17,6 @@ public class GUI extends Controller
 {
 	protected Input input;
 	public boolean stepState = true;
-	private Item leftHand;
 	
 	private SnakeHead mob;
 	
@@ -31,10 +30,10 @@ public class GUI extends Controller
 	public void tick()
 	{
         //walk
+		if(input.up.down) mob.onUp();
+		if(input.down.down) mob.onDown();
         if(input.right.down) mob.onRight();
         if(input.left.down) mob.onLeft();
-        if(input.up.down) mob.onUp();
-        if(input.down.down) mob.onDown();
         
 //        //weapon
 //        if(input.b0Clicked)
@@ -134,11 +133,11 @@ public class GUI extends Controller
 	
 	public long getMobX()
 	{
-		return mob.getX();
+		return mob.get—X();
 	}
 	public long getMobY()
 	{
-		return mob.getY();
+		return mob.get—Y();
 	}
 	
 	public int getX()

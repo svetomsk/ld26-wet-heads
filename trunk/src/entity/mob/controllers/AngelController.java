@@ -17,9 +17,9 @@ public class AngelController extends Controller{
 			return;
 		}
 		
-		if(Math.abs(character.getX()-mob.getX())>1000) return;
+		if(Math.abs(character.getÑX()-mob.getÑX())>1000) return;
 		
-		boolean right = (character.getX()-mob.getX()>0);		
+		boolean right = (character.getÑX()-mob.getÑX()>0);		
 		if(right) mob.onRight();
 		else mob.onLeft();
 		
