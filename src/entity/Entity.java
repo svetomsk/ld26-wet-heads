@@ -444,6 +444,7 @@ public class Entity {
 	public long getY() {return y;}
 	public long get—X() {return x + getWidth()/2;}
 	public long get—Y() {return y + getHeight()/2;}
+	
 	protected void setX(long x) {this.x = x - getWidth()/2;}
 	protected void setY(long y) {this.y = y - getHeight()/2;}
 	

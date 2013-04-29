@@ -3,19 +3,16 @@ package entity.mob.snake;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
-import particle.Blood;
-
 import main.Game;
 import main.Pictures;
 import main.World;
+import particle.Blood;
 import GUI.GUI;
 import entity.mob.controllers.Group;
-import entity.mob.snake.weapon.RocketLauncher;
 import entity.mob.snake.weapon.Weapon;
 
 public class SnakeHead extends SnakePart
 {
-	
 	private Weapon wep;
 	
 	public Weapon getWep()
@@ -28,6 +25,7 @@ public class SnakeHead extends SnakePart
 	private double angle = Math.PI;
 	
 	public ArrayList<SnakePart> body = new ArrayList<SnakePart>();
+	private Path bodyPath;
 	
 	@Override
 	public void finalInit(World world)
@@ -50,14 +48,14 @@ public class SnakeHead extends SnakePart
 		SnakePart part = body.get(body.size()-1);
 		body.add((SnakePart) new SnakeTail().init(part.getÑX()+part.getWidth(), part.getÑY(), 0, 0, 0, 0, world, part));
 		
-		v = 9;
+		bodyPath = new Path(getX(), getY());
 	}
 	
 	private boolean speedUp = false;
 	
-	private double fluct = 0;
-	private double deltaFluct = 0.01;
-	private double borderFluct = 1.0/12;
+//	private double fluct = 0;
+//	private double deltaFluct = 0.01;
+//	private double borderFluct = 1.0/12;
 	
 	@Override
 	public void tick()
@@ -68,13 +66,16 @@ public class SnakeHead extends SnakePart
 		speedUp = false;
 		super.tick();
 		
-		fluct += deltaFluct;
-		if(Math.abs(fluct)>borderFluct)
-		{
-			deltaFluct *= -1;
-		}
+		bodyPath.add(x, y);
+		bodyPath.use(body);
 		
-		prevAngle = angle + fluct * Math.PI;
+//		fluct += deltaFluct;
+//		if(Math.abs(fluct)>borderFluct)
+//		{
+//			deltaFluct *= -1;
+//		}
+//		
+//		prevAngle = angle + fluct * Math.PI;
 		
 		lvx = v*Math.cos(angle);
 		lvy = v*Math.sin(angle);
@@ -145,17 +146,14 @@ public class SnakeHead extends SnakePart
         
 //		drawBounds(g);
 		drawHealth(g);
+		
+		bodyPath.draw(g);
     }
     @Override
 	public double getSpeed()
 	{
-		return 16;
+		return 8;
 	}
-//    @Override
-//	public double getJumpPower()
-//	{
-//		return 1;
-//	}
     @Override
 	public int getMaxHP()
 	{

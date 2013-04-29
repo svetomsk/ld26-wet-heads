@@ -25,7 +25,7 @@ public class SnakePart extends Mob
 	protected SnakePart backPart;
 	protected double angle;
 	
-	protected int segment_gap = 20;
+	protected static int segment_gap = 20;
 	
 	public Entity init(long x, long y, double lvx, double lvy, double gvx, double gvy, World world, SnakePart nextPart)
 	{
@@ -64,36 +64,18 @@ public class SnakePart extends Mob
     @Override
     public void tick()
     {
-    	prevX = x;
-    	prevY = y;
-    	prevAngle = angle;
-
-    	if(frontPart != null)
-    	{
-	    	x = frontPart.getPrevX();
-	    	y = frontPart.getPrevY();
-	    	angle = frontPart.getPrevAngle();
-    	}
-    	
-    	super.tick();
-    			
-//    	if(frontPart == null) return;
-//    	if(backPart == null) return;
-//    	
-//    	double dx = frontPart.get—X() - backPart.get—X();
-//    	double dy = frontPart.get—Y() - backPart.get—Y();
-//    	
-//    	angle = getAngle(dx, dy) - Math.PI/2;
-//    	
-//    	double r2 = (frontPart.get—X()-get—X())*(frontPart.get—X()-get—X()) + (frontPart.get—Y()-get—Y())*(frontPart.get—Y()-get—Y());
-//    	
-//    	if(segment_gap*segment_gap < r2)
+//    	prevX = x;
+//    	prevY = y;
+//    	prevAngle = angle;
+//
+//    	if(frontPart != null)
 //    	{
-//    		setX((long) (frontPart.get—X() + segment_gap*Math.cos(angle)));
-//    		setY((long) (frontPart.get—Y() + segment_gap*Math.sin(angle)));
+//	    	x = frontPart.getPrevX();
+//	    	y = frontPart.getPrevY();
+//	    	angle = frontPart.getPrevAngle();
 //    	}
+    	super.tick();
     }
-    
     @Override
     protected void initPictures() 
     {
@@ -108,11 +90,11 @@ public class SnakePart extends Mob
     	int drawx = (int) (get—X()-Game.x);
     	int drawy = (int) (get—Y()-Game.y);
 
-		g.rotate(angle+Math.PI/2, drawx, drawy);
-		g.drawImage(img, drawx-img.getWidth(null)/2, drawy-img.getHeight(null)/2, null);
-		g.rotate(-angle-Math.PI/2, drawx, drawy);
+//		g.rotate(angle+Math.PI/2, drawx, drawy);
+//		g.drawImage(img, drawx-img.getWidth(null)/2, drawy-img.getHeight(null)/2, null);
+//		g.rotate(-angle-Math.PI/2, drawx, drawy);
         
-//		drawBounds(g);
+		drawBounds(g);
     }
     
     @Override
@@ -167,5 +149,16 @@ public class SnakePart extends Mob
 	public double getPrevAngle() 
 	{
 		return prevAngle;
+	}
+
+	public void addCoords(long dx, long dy) 
+	{
+		x += dx;
+		y += dy;
+	}
+	public void setCoords(long x, long y) 
+	{
+		this.x = x;
+		this.y = y;
 	}
 }
