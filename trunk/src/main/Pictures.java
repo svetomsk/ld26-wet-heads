@@ -37,7 +37,6 @@ public class Pictures
     
     public static Image apple;
     public static Image pear;
-
     
     public static Image spark1 = read("resources/spark1.png", 16, 16);
     public static Image spark2 = read("resources/spark2.png", 16, 16);
@@ -46,6 +45,8 @@ public class Pictures
     public static Image simpleSnakePart = read("resources/simplebodysnake.png", 32, 32);
     public static Image simpleSnakeHead = read("resources/simpleheadsnake.png", 48, 48);
     public static Image simpleSnakeTail = read("resources/simpletailsnake.png", 64, 48);
+    
+    public static Image enemy = read("resources/enemy.png", 64, 64);
 
 	public static Image explode = read("resources/explode.png", 512, 512);
 

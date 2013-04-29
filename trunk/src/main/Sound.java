@@ -28,7 +28,7 @@ class Song
     
     public void play()
     {
-//       ac.play();
+       ac.play();
     }
 
     public static double getLength(URL path) throws Exception

@@ -1,6 +1,7 @@
 package entity.mob;
 
 import java.awt.Graphics2D;
+import java.awt.Image;
 
 import main.Game;
 import main.Pictures;
@@ -80,10 +81,11 @@ public class Enemy extends Mob
     		new Enemy().init(x, y, world);
     	}
     }
+    private Image img;
     @Override
     protected void initPictures() 
     {
-    	img = Pictures.chest;
+    	img = Pictures.enemy;
     }
     @Override
     public void draw(Graphics2D g)
@@ -92,9 +94,9 @@ public class Enemy extends Mob
     	int drawy = (int) (getCY()-Game.y);
 		  
 		g.rotate(angle+Math.PI/2, drawx, drawy);
-		g.drawImage(img[currentFrame], drawx-img[currentFrame].getWidth(null)/2, drawy-3*img[currentFrame].getHeight(null)/4, null);
+		g.drawImage(img, drawx-img.getWidth(null)/2, drawy-3*img.getHeight(null)/4, null);
 		g.rotate(-angle-Math.PI/2, drawx, drawy);
-		drawBounds(g);
+//		drawBounds(g);
 		drawHealth(g);
     }
     @Override
