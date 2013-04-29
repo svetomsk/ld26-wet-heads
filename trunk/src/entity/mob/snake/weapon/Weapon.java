@@ -8,23 +8,20 @@ import main.Pictures;
 import main.World;
 import entity.Entity;
 import entity.mob.Mob;
-import entity.mob.snake.SnakeHead;
-import entity.mob.snake.SnakePart;
-import entity.mob.snake.SnakeTail;
 
 public class Weapon extends Entity
 {
-	protected SnakeHead owner;
+	protected Mob owner;
 	private Image img;
 	
-	public Weapon init(long x, long y, double lvx, double lvy, double gvx, double gvy, World world, SnakeHead owner)
+	public Weapon init(long x, long y, double lvx, double lvy, double gvx, double gvy, World world, Mob owner)
 	{
 		this.owner = owner;
 		return (Weapon) super.init(x, y, lvx, lvy, gvx, gvy, world);
 	}
 	
 	
-	public void use()
+	public void use(double angle)
 	{
 		
 	}

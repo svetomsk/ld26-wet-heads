@@ -9,6 +9,8 @@ import java.io.IOException;
 import main.Game;
 import main.Input;
 import main.Pictures;
+import entity.Entity;
+import entity.mob.Enemy;
 import entity.mob.Mob;
 import entity.mob.controllers.Controller;
 import entity.mob.snake.SnakeHead;
@@ -52,11 +54,11 @@ public class GUI extends Controller
         }
         
         //throw item
-        if(input.space.typed)
+        if(input.lmbClicked)
         {
         	try
         	{
-        		mob.getWep().use();
+        		mob.getWep().use(Entity.getAngle(Game.x + input.x*Game.scale - mob.getCX(), Game.y + input.y*Game.scale - mob.getCY()) + Math.PI/2);
         	}
         	catch(NullPointerException ex){}
         }
@@ -71,6 +73,7 @@ public class GUI extends Controller
         
 		if(input.wheelClicked)
 		{
+			new Enemy().init(0, 0, mob.getWorld());
 			mob.getWorld().spawnRandomBonus();
 //			new Angel().init((input.x+Game.x), (input.y+Game.y), mob.getWorld());
 //			new DamageMignonSeed((input.x+Game.x), (input.y+Game.y), mob.getWorld());
@@ -111,15 +114,6 @@ public class GUI extends Controller
         {
             Game.addMenu();
         }
-        if(input.quicksave.typed)
-        {
-        	Game.quickSave();
-        }
-        if(input.quickload.typed)
-        {
-        	Game.quickLoad();
-        }
-        
         if(mob.isDeleted())
         {
 //        	Game.addMenu();
@@ -128,6 +122,10 @@ public class GUI extends Controller
         if(input.pause.typed)
         {
            stepState = !stepState;
+        }
+        if(input.t.typed)
+        {
+        	drawPath = !drawPath;
         }
 	}
 	@Override
@@ -139,12 +137,19 @@ public class GUI extends Controller
 //		}
 		return false;
 	}
+	
+	boolean drawPath;
+	
 	public void draw(Graphics2D g)
 	{
 		if(!stepState)
 		{
 			Image value = Pictures.pause;
 			g.drawImage(value, (int)(Game.WIDTH/2-value.getWidth(null)/2), 128, null);
+		}
+		if(drawPath)
+		{
+			mob.getBodyPath().draw(g);
 		}
 	}
 	
