@@ -14,7 +14,6 @@ import javax.swing.*;
 class Level_complete extends JFrame
 {
     private int width = 400, height = 400;
-    private JButton next;
     private Image current;
     private int n;
     Level_complete(int n) throws IOException
@@ -24,7 +23,6 @@ class Level_complete extends JFrame
         setLayout(new FlowLayout());
         setUndecorated(true);
         setLocationRelativeTo(null);
-        initializeButton();
         initializePicture();
         setListeners();
         
@@ -38,25 +36,7 @@ class Level_complete extends JFrame
     	super.paint(g);
     	g.drawImage(current, 0, 0, width, height, this);
     }   
-    
-    private void initializeButton()
-    {
-        next = new JButton("NEXT");
-        next.setPreferredSize(new Dimension(100, 50));
-        next.setBackground(Color.white);
-        next.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent ae)
-            {
-                Game.nextLevel();
-                setVisible(false);
-            }
-        });
-        next.setFocusable(true);
-        add(next);
-    }
-    
+            
     private void initializePicture() throws IOException
     {       
         current = Pictures.complete_level[n-1];      
@@ -70,7 +50,7 @@ class Level_complete extends JFrame
             @Override
             public void mouseClicked(MouseEvent e) 
             {
-                System.exit(0);
+                Game.nextLevel();
             }            
         }
         );
