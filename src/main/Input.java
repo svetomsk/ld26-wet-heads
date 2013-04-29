@@ -65,8 +65,10 @@ public class Input
 	public Key pause = new Key(this).bind(KeyEvent.VK_PAUSE).bind(KeyEvent.VK_P); // modilied
 	public Key space = new Key(this).bind(KeyEvent.VK_SPACE);
 	public Key q = new Key(this).bind(KeyEvent.VK_Q);
+	public Key t = new Key(this).bind(KeyEvent.VK_T);
 	public Key quicksave = new Key(this).bind(KeyEvent.VK_F5);
 	public Key quickload = new Key(this).bind(KeyEvent.VK_F9);
+
 
 	public Input()
 	{

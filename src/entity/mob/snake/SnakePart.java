@@ -23,7 +23,7 @@ public class SnakePart extends Mob
 	
 	protected SnakePart frontPart;
 	protected SnakePart backPart;
-	protected double angle;
+//	protected double angle;
 	
 	protected static int segment_gap = 20;
 	

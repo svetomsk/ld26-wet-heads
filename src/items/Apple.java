@@ -5,8 +5,7 @@ import java.awt.Image;
 
 import main.Game;
 import main.Pictures;
-
-import entity.mob.snake.SnakeHead;
+import entity.mob.Mob;
 
 public class Apple extends Item{
 	
@@ -33,9 +32,9 @@ public class Apple extends Item{
 	}
 	
 	@Override
-	protected boolean interactOnSnakeHead(SnakeHead snakeHead)
+	protected boolean interactOnMob(Mob mob)
 	{
-		snakeHead.feed();
+		mob.feed();
 		delete();
 		return true;
 	}

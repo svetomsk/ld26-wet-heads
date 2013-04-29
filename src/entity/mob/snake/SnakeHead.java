@@ -22,7 +22,7 @@ public class SnakeHead extends SnakePart
 	
 	private GUI control;
 	private double v = 0;
-	private double angle = Math.PI;
+//	private double angle = Math.PI;
 	
 	public ArrayList<SnakePart> body = new ArrayList<SnakePart>();
 	private Path bodyPath;
@@ -49,6 +49,7 @@ public class SnakeHead extends SnakePart
 		body.add((SnakePart) new SnakeTail().init(part.getCX()+part.getWidth(), part.getCY(), 0, 0, 0, 0, world, part));
 		
 		bodyPath = new Path(getCX(), getCY());
+		angle = Math.PI;
 	}
 	
 //	private boolean speedUp = false;
@@ -136,8 +137,6 @@ public class SnakeHead extends SnakePart
         
 //		drawBounds(g);
 		drawHealth(g);
-		
-		bodyPath.draw(g);
     }
     @Override
 	public double getSpeed()
@@ -169,10 +168,9 @@ public class SnakeHead extends SnakePart
 		return angle;
 	}
 
-    private int satiety = 0;
+    @Override
 	public void feed()
 	{
-		satiety++;
 		hp += 1000;
 		if(hp > getMaxHP())
 		{
@@ -202,11 +200,11 @@ public class SnakeHead extends SnakePart
 		body.add(tail);
 	}
 
-	public int getSatiety()
+	public Path getBodyPath() 
 	{
-		return satiety;
+		return bodyPath;
 	}
-
+	
 	public void setNewWeapon(Weapon wep)
 	{
 		this.wep = wep.init(getCX(), getCY(), 0, 0, 0, 0, world, this);

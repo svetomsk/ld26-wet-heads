@@ -214,4 +214,11 @@ public class Mob extends Entity{
 	{
 		return group;
 	}
+	
+	protected double angle;
+	public double getAngle() 
+	{
+		return angle;
+	}
+	public void feed(){}
 }

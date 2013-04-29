@@ -14,24 +14,24 @@ public class SnakeTail extends SnakePart
 		frontPart.setBackPart(this);
 		return super.init(x, y, lvx, lvy, gvx, gvy, world);
 	}
-	@Override
-	public void tick()
-	{
-		angle = getAngle(frontPart.frontPart.getCX() - frontPart.getCX(), frontPart.frontPart.getCY() - frontPart.getCY()) - Math.PI/2; 
-				
-//    	double dx = frontPart.getX() - getWidth()*Math.cos(angle);    	
-//    	double dy = frontPart.getY() - getWidth()*Math.sin(angle);
+//	@Override
+//	public void tick()
+//	{
+//		angle = getAngle(frontPart.frontPart.getCX() - frontPart.getCX(), frontPart.frontPart.getCY() - frontPart.getCY()) - Math.PI/2; 
+//				
+////    	double dx = frontPart.getX() - getWidth()*Math.cos(angle);    	
+////    	double dy = frontPart.getY() - getWidth()*Math.sin(angle);
+////    	
+////    	angle = getAngle(dx, dy) - Math.PI/2;
 //    	
-//    	angle = getAngle(dx, dy) - Math.PI/2;
-    	
-    	double r2 = (frontPart.getCX()-getCX())*(frontPart.getCX()-getCX()) + (frontPart.getCY()-getCY())*(frontPart.getCY()-getCY());
-    	
-    	if(segment_gap*segment_gap < r2)
-    	{
-    		setX((long) (frontPart.getCX() + segment_gap*Math.cos(angle)));
-    		setY((long) (frontPart.getCY() + segment_gap*Math.sin(angle)));
-    	}
-	}
+//    	double r2 = (frontPart.getCX()-getCX())*(frontPart.getCX()-getCX()) + (frontPart.getCY()-getCY())*(frontPart.getCY()-getCY());
+//    	
+//    	if(segment_gap*segment_gap < r2)
+//    	{
+//    		setX((long) (frontPart.getCX() + segment_gap*Math.cos(angle)));
+//    		setY((long) (frontPart.getCY() + segment_gap*Math.sin(angle)));
+//    	}
+//	}
     @Override
     protected void initPictures() 
     {

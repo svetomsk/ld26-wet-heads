@@ -16,12 +16,13 @@ public class Poisoner extends Weapon
 	
 	private static double rocketSpeed = 16;
 	
-	public void use()
+	@Override
+	public void use(double angle)
 	{
 		if(currentCooldown < 0)
 		{
 			new Poison().init(owner.getCX(), owner.getCY(),
-				Math.cos(owner.getAngle())*rocketSpeed, Math.sin(owner.getAngle())*rocketSpeed,
+				Math.cos(angle)*rocketSpeed, Math.sin(angle)*rocketSpeed,
 				0, 0, owner.getWorld(), owner);
 			currentCooldown = cooldown;
 		}
