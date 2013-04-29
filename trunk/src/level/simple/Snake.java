@@ -15,7 +15,7 @@ class Snake
         Snake.x = x; Snake.y = y;
         Point head = new Point(x, y);        
         body.add(head);
-        Point tail = new Point(x + 2, y);
+        Point tail = new Point(x + 1, y);
         body.add(tail);
         length = 2;
         fillField();
@@ -25,7 +25,7 @@ class Snake
     {
         for(Point p : body)
         {
-            Level.field[p.x][p.y] = 2;
+            Level.field[p.y][p.x] = 2;
         }
     }
     
@@ -75,10 +75,10 @@ class Snake
     static public void addTail()
     {
         length++;
-        int lastx = body.get(body.size() - 1).x;
-        int lasty = body.get(body.size() - 1).y;
-        int prelastx = body.get(body.size() - 2).x;
-        int prelasty = body.get(body.size() - 2).y;
+        int lastx = body.get(body.size() - 1).y;
+        int lasty = body.get(body.size() - 1).x;
+        int prelastx = body.get(body.size() - 2).y;
+        int prelasty = body.get(body.size() - 2).x;
         if(lastx == prelastx)
         {
             if(prelasty > lasty)
