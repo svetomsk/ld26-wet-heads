@@ -146,12 +146,16 @@ public class Game extends Canvas implements Runnable
         	while(loop<maxSkipFrames && System.nanoTime()>nextTime+nsPerFrame)
         	{
 	            input = inputHandler.update(SIZE);
-	            if(levelNumber == 3)
-                        Level.tick();
                     
                     gui.tickGlobal();                    
                     PrintString.printingTimersTick();
-                    if(gui.stepState) world.step();
+                    if(gui.stepState)
+                	{
+                    	if(levelNumber == 3)
+                    		Level.tick();
+                    	else
+                    	world.step();
+                	}
 
                     focus();
                         nextTime += nsPerFrame;
@@ -294,6 +298,7 @@ public class Game extends Canvas implements Runnable
     	levelNumber++;
         if(levelNumber == 3)
         {
+        	gui.stepState = true;
             Level.init(WIDTH, HEIGHT, input);            
         }
         else            

@@ -111,6 +111,10 @@ public class GUI extends Controller
 //			mob.getWorld().clear();
 //			mob.getWorld().createLevel();
 //		}
+		if(input.pause.typed)
+		{
+			stepState = !stepState;
+		}
         if(input.quit.typed)
         {
             Game.addMenu();
@@ -119,10 +123,6 @@ public class GUI extends Controller
         {
 //        	Game.addMenu();
         	Game.showDeath();
-        }
-        if(input.pause.typed)
-        {
-           stepState = !stepState;
         }
         if(input.t.typed)
         {
