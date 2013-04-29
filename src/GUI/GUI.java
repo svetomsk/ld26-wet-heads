@@ -39,8 +39,8 @@ public class GUI extends Controller
         
         if(input.q.typed)
         {
-        	if(feeded)
-        	{
+//        	if(feeded)
+//        	{
         		stepState = false;
         		try
     			{
@@ -50,7 +50,7 @@ public class GUI extends Controller
     				// TODO Auto-generated catch block
     				e.printStackTrace();
     			}
-        	}
+//        	}
         }
         
         //throw item

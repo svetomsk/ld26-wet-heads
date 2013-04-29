@@ -23,6 +23,7 @@ import javax.swing.JPanel;
 
 import main.saving.Date;
 import GUI.GUI;
+import level.simple.Level;
 
 public class Game extends Canvas implements Runnable
 {
@@ -92,7 +93,7 @@ public class Game extends Canvas implements Runnable
     private void init()
     {
     	input = inputHandler.update(SIZE);
-    	
+//        Level.init(WIDTH, HEIGHT, input);
     	world = new World();
     	world.createLevel(1);
     	
@@ -140,15 +141,18 @@ public class Game extends Canvas implements Runnable
         	while(loop<maxSkipFrames && System.nanoTime()>nextTime+nsPerFrame)
         	{
 	            input = inputHandler.update(SIZE);
-	            
-	            gui.tickGlobal();
-	            PrintString.printingTimersTick();
-	            if(gui.stepState) world.step();
-	            
-	            focus();
-	        	nextTime += nsPerFrame;
-	            loop++;
-	            physFrames++;
+	            if(levelNumber == 3)
+                        Level.tick();
+                    
+                    gui.tickGlobal();                    
+                    PrintString.printingTimersTick();
+                    if(gui.stepState) world.step();
+
+                    focus();
+                        nextTime += nsPerFrame;
+                    loop++;
+                    physFrames++;
+//                    }
         	}
             swap();
 
@@ -199,26 +203,34 @@ public class Game extends Canvas implements Runnable
                 createBufferStrategy(2);
                 return;            
             }
-            Graphics2D g =(Graphics2D) bs.getDrawGraphics();
-            
+            Graphics2D g =(Graphics2D) bs.getDrawGraphics();            
+                       
             g.scale(1/scale, 1/scale);
             
             g.setColor(Color.WHITE);
             g.fillRect(0, 0, WIDTH, HEIGHT);
-            
-            world.draw(g);
-            gui.draw(g);
-            
-//            g.setColor(new Color((float)(1-world.character.hp), (float)world.character.hp, (float)0.0));
-//            g.fillRect(32, 32, (int)(world.character.hp * WIDTH/3), 8);
-            
-            g.setColor(Color.GRAY);
-            g.drawString(frames, WIDTH - frames.length() * 12, 12);
+            if(levelNumber == 3)
+            {
+                Level.draw(g);
+//                System.out.println("SWAP RENDER");
+            }
+            else
+            {
+                world.draw(g);
+                
+                gui.draw(g);
+            }
+       
+    //            g.setColor(new Color((float)(1-world.character.hp), (float)world.character.hp, (float)0.0));
+    //            g.fillRect(32, 32, (int)(world.character.hp * WIDTH/3), 8);
 
-            g.scale(2, 2);
-            
-            PrintString.drawPrinting(g);
-            
+                g.setColor(Color.GRAY);
+                g.drawString(frames, WIDTH - frames.length() * 12, 12);
+
+                g.scale(2, 2);
+
+                PrintString.drawPrinting(g);
+//            }
             g.dispose();
             bs.show();
         }
@@ -271,9 +283,14 @@ public class Game extends Canvas implements Runnable
 	}
     private static int levelNumber = 1;
     public static void nextLevel()
-    {
+    {        
     	levelNumber++;
-    	world.createLevel(levelNumber);
+        if(levelNumber == 3)
+        {
+            Level.init(WIDTH, HEIGHT, input);            
+        }
+        else            
+            world.createLevel(levelNumber);        
     }
     public static void finishLevel() throws IOException
     {
