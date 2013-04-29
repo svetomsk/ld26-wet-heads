@@ -14,15 +14,14 @@ public class Pictures
 {
     public static Image pause;
     
-    public static Image roll[] = loadAndCut("resources/roll.png", 6, 256);
-    public static Image chest[] = loadAndCut("resources/chest.png", 6, 32);
     public static Image complete_level[];
     public static Image blood;
     
     public static Image flame_item;
     public static Image poison_item;
     public static Image snow_item;
-    public static Image rocket_item = read("resources/rocket_item.png", 64, 64);
+    public static Image rocket_item = read("resources/rocketforhead.png", 64, 64);
+    public static Image rocket_presized = read("resources/rocket.png", 64, 64);
     
     public static Image snow;
     public static Image rocket;
@@ -46,7 +45,8 @@ public class Pictures
     public static Image simpleSnakeHead = read("resources/simpleheadsnake.png", 48, 48);
     public static Image simpleSnakeTail = read("resources/simpletailsnake.png", 64, 48);
     
-    public static Image enemy = read("resources/enemy.png", 64, 64);
+//    public static Image enemy = read("resources/enemy.png", 64, 64);
+    public static Image monster = read("resources/monster.png", 64, 64);
 
 	public static Image explode = read("resources/explode.png", 512, 512);
 
