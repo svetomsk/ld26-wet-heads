@@ -53,6 +53,7 @@ class Level_complete extends JFrame
                 setVisible(false);
             }
         });
+        next.setFocusable(true);
         add(next);
     }
     

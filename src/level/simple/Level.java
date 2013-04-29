@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.util.Random;
+import main.Game;
 import main.Input;
 
 
@@ -15,7 +16,7 @@ public class Level
     static int width, height;
     static int size;
     
-    static int vector = 0;        
+    static int vector = 3;        
     static Snake snake;
     
     static int fps = 7;
@@ -34,9 +35,9 @@ public class Level
     static public void init(int w, int h, Input input)
     {
         Level.input = input;        
-        width = w; height = h ;          
-        m = n;
-        size = height/m; 
+        width = w; height = h;
+        size = height/n;
+        m = width/size;
         field = new byte[n][m];
         snake = new Snake(n/2, m/2);
         refresh();
@@ -48,7 +49,7 @@ public class Level
         for(int i = 0; i < n; i++)
         {
             field[i][0] = -1;
-            field[i][n-1] = -1;
+            field[i][m-1] = -1;
         }
         for(int i = 0; i < m; i++)
         {            
@@ -68,7 +69,7 @@ public class Level
                     g.setColor(wall);
                 else
                     g.setColor(back);
-                g.fillRect(i*size, j*size, size, size);
+                g.fillRect(j*size, i*size, size, size);
             }
         }
         g.setColor(sn);
@@ -90,49 +91,49 @@ public class Level
             int y = Snake.y;
             if(vector == 0)
             {
-                if(field[x-1][y] == 0)
+                if(field[y - 1][x] == 0)
                 {                        
-                    isApple(x-1, y);
-                    Snake.moveUp();                    
+                    isApple(y-1, x);
+                    Snake.moveLeft();                    
                 }
                 else
                 {
-    //                System.out.println("finish");
+                    Game.showDeath();
                 }
             }
             if(vector == 1)
             {
-                if(field[x][y-1] == 0)
+                if(field[y][x-1] == 0)
                 {                    
-                    isApple(x, y-1);
-                    Snake.moveLeft();
+                    isApple(y, x-1);
+                    Snake.moveUp();
                 }
                 else
                 {
-    //                System.out.println("finish");
+                    Game.showDeath();
                 }
             }
             if(vector == 2)
             {            
-                if(field[x+1][y] == 0)
+                if(field[y + 1][x] == 0)
                 {                    
-                    isApple(x+1, y);
-                    Snake.moveDown();
+                    isApple(y + 1, x);
+                    Snake.moveRight();
                 }
                 else
                 {
-    //                System.out.println("finish");
+                    Game.showDeath();
                 }
             }
             if(vector == 3)
-            {
-                if(field[x][y+1] == 0)
+            {                
+                if(field[y][x + 1] == 0)
                 {                    
-                    isApple(x, y+1);
-                    Snake.moveRight();
+                    isApple(y, x + 1);
+                    Snake.moveDown();
                 }
-    //            else
-    //                System.out.println("finish");
+                else
+                    Game.showDeath();
             }
             Level.refresh();
             Snake.fillField();
@@ -144,7 +145,7 @@ public class Level
     
     static private void isApple(int x, int y)
     {
-        if(x == applex && y == appley)
+        if(x == appley && y == applex)
         {
             Snake.addTail();
             eaten = true;
@@ -161,8 +162,8 @@ public class Level
             int geny = 0 + r.nextInt(m);
             if(field[genx][geny] == 0)
             {
-                applex = genx;
-                appley = geny;
+                applex = geny;
+                appley = genx;
                 c = true;
                 eaten = false;
             }
@@ -177,10 +178,10 @@ public class Level
     
     static private void updateKeyState()
     {
-        if(input.left.down) Level.setVector(0);
-        if(input.up.down) Level.setVector(1);
-        if(input.right.down) Level.setVector(2);
-        if(input.down.down) Level.setVector(3);
+        if(input.up.down) Level.setVector(0);
+        if(input.left.down) Level.setVector(1);
+        if(input.down.down) Level.setVector(2);
+        if(input.right.down) Level.setVector(3);
     }
 }
 

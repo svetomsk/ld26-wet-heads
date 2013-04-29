@@ -93,9 +93,13 @@ public class Game extends Canvas implements Runnable
     private void init()
     {
     	input = inputHandler.update(SIZE);
-//        Level.init(WIDTH, HEIGHT, input);
-    	world = new World();
-    	world.createLevel(1);
+        if(levelNumber == 3)
+            Level.init(WIDTH, HEIGHT, input);
+        else
+        {
+            world = new World();
+            world.createLevel(levelNumber);
+        }
     	
         requestFocus();
     }
@@ -120,7 +124,8 @@ public class Game extends Canvas implements Runnable
     @Override
     public void run() 
     {
-    	init();
+        
+        init();
     	int fps = 60;
     	int maxSkipFrames = 10;
     	
@@ -207,12 +212,14 @@ public class Game extends Canvas implements Runnable
                        
             g.scale(1/scale, 1/scale);
             
-            g.setColor(Color.WHITE);
+            if(levelNumber == 3)
+                g.setColor(Color.GRAY);
+            else
+                g.setColor(Color.WHITE);
             g.fillRect(0, 0, WIDTH, HEIGHT);
             if(levelNumber == 3)
             {
                 Level.draw(g);
-//                System.out.println("SWAP RENDER");
             }
             else
             {
@@ -435,9 +442,12 @@ public class Game extends Canvas implements Runnable
             public void actionPerformed(ActionEvent ae)
             {
                frame.remove(menu);
-               gameComponents = new Game(Toolkit.getDefaultToolkit().getScreenSize());               
+               gameComponents = new Game(Toolkit.getDefaultToolkit().getScreenSize());  
                frame.add(gameComponents);
+               
+                   
                gameComponents.init();
+               
                gameComponents.start();
                frame.setVisible(true);    
             }
