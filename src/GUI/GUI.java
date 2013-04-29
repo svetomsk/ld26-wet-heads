@@ -35,12 +35,21 @@ public class GUI extends Controller
         if(input.right.down) mob.onRight();
         if(input.left.down) mob.onLeft();
         
-//        //weapon
-//        if(input.b0Clicked)
-//        {
-//        	if(leftHand != null)
-//        		leftHand.use(input.x+Game.x, input.y+Game.y);
-//        }
+        if(input.q.typed)
+        {
+        	if(feeded)
+        	{
+        		stepState = false;
+        		try
+    			{
+    				Game.finishLevel();
+    			} catch (IOException e)
+    			{
+    				// TODO Auto-generated catch block
+    				e.printStackTrace();
+    			}
+        	}
+        }
         
         //throw item
         if(input.space.typed)
@@ -51,22 +60,12 @@ public class GUI extends Controller
         	}
         	catch(NullPointerException ex){}
         }
-        if(input.q.typed)
-        {
-        	try
-			{
-				Game.finishLevel();
-			} catch (IOException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+        	
 //        	if(leftHand!=null)
 //        	{
 //		    	leftHand.throwItem();
 //		    	leftHand = null;
 //        	}
-        }
         
     	//----------------------------------------------------------
         
@@ -80,6 +79,24 @@ public class GUI extends Controller
 //			new Zombie((input.x+Game.x), (input.y+Game.y), mob.getWorld());
 //			new SwordItem((input.x+Game.x), (input.y+Game.y), mob.getWorld());
 //			new Wind((input.x+Game.x), (input.y+Game.y), mob.getWorld());
+		}
+	}
+	
+	private boolean feeded = false; 
+	public void feeded()
+	{
+		if(mob.body.size()>72 && !feeded)
+		{
+			feeded = true;
+			stepState = false;
+			try
+			{
+				Game.finishLevel();
+			} catch (IOException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -133,11 +150,11 @@ public class GUI extends Controller
 	
 	public long getMobX()
 	{
-		return mob.get—X();
+		return mob.getCX();
 	}
 	public long getMobY()
 	{
-		return mob.get—Y();
+		return mob.getCY();
 	}
 	
 	public int getX()

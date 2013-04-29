@@ -35,8 +35,8 @@ public class Shell extends Entity
     @Override
     public void draw(Graphics2D g)
     {
-    	int drawx = (int) (get—X()-Game.x);
-    	int drawy = (int) (get—Y()-Game.y);
+    	int drawx = (int) (getCX()-Game.x);
+    	int drawy = (int) (getCY()-Game.y);
 
 		double angle = getAngle(getLVX(), getLVY());
 		  

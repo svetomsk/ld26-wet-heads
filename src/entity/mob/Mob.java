@@ -139,19 +139,19 @@ public class Mob extends Entity{
 	
 	public void onRight()
 	{
-		lvx++;
+//		lvx++;
 	}
 	public void onLeft()
 	{
-		lvx--;
+//		lvx--;
 	}
 	public void onUp()
 	{
-		lvy--;
+//		lvy--;
 	}
 	public void onDown()
 	{
-		lvy++;
+//		lvy++;
 	}
 	public boolean tryGet(Item item)
 	{

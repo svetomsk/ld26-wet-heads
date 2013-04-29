@@ -434,16 +434,16 @@ public class Entity {
 	}
 	public static long getDistanse(Entity e1, Entity e2)
 	{
-		return (e1.get—X()+e1.getWidth()/2-e2.get—X()-e2.getWidth()/2)
-				*(e1.get—X()+e1.getWidth()/2-e2.get—X()-e2.getWidth()/2)
-				+(e1.get—Y()+e1.getHeight()/2-e2.get—Y()-e2.getHeight()/2)
-				*(e1.get—Y()+e1.getHeight()/2-e2.get—Y()-e2.getHeight()/2);
+		return (e1.getCX()+e1.getWidth()/2-e2.getCX()-e2.getWidth()/2)
+				*(e1.getCX()+e1.getWidth()/2-e2.getCX()-e2.getWidth()/2)
+				+(e1.getCY()+e1.getHeight()/2-e2.getCY()-e2.getHeight()/2)
+				*(e1.getCY()+e1.getHeight()/2-e2.getCY()-e2.getHeight()/2);
 	}
 	
 	public long getX() {return x;}
 	public long getY() {return y;}
-	public long get—X() {return x + getWidth()/2;}
-	public long get—Y() {return y + getHeight()/2;}
+	public long getCX() {return x + getWidth()/2;}
+	public long getCY() {return y + getHeight()/2;}
 	
 	protected void setX(long x) {this.x = x - getWidth()/2;}
 	protected void setY(long y) {this.y = y - getHeight()/2;}
