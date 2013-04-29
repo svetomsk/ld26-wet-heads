@@ -57,28 +57,14 @@ public class ImageParser
 					mas[g][i] = IDManager.getBlockID(Rock.class);
 				}
 
-				else if (rgb == COLOR_PURPLE) // character
+				else if (rgb == COLOR_PURPLE)
 				{
 					mas[g][i] = 127;
-				} else if (rgb == COLOR_YELLOW) // butterfly
+				} 
+				else if (rgb == COLOR_GREEN)
 				{
 					mas[g][i] = 126;
 				}
-
-				else if (rgb == COLOR_BLACK) // chest
-				{
-					mas[g][i] = 125;
-				} else if (rgb == COLOR_ORANGE) // archangel
-				{
-					mas[g][i] = 124;
-				} else if (rgb == COLOR_BLUE) // zombie
-				{
-					mas[g][i] = 123;
-				} else if (rgb == COLOR_END) // end
-				{
-					mas[g][i] = 122;
-				}
-
 				else
 				{
 //					System.out.println("" + rgb);

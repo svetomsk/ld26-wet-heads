@@ -9,6 +9,7 @@ import main.World;
 import particle.Blood;
 import GUI.GUI;
 import entity.mob.controllers.Group;
+import entity.mob.snake.weapon.RocketLauncher;
 import entity.mob.snake.weapon.Weapon;
 
 public class SnakeHead extends SnakePart
@@ -40,21 +41,23 @@ public class SnakeHead extends SnakePart
 		group = Group.character;
 		
 		head = this;
+		createBody();
 		
-		body.add((SnakePart) new SnakePart().init(getCX()+getWidth(), getCY(), 0, 0, 0, 0, world, this));
+		bodyPath = new Path(getCX(), getCY());
+		angle = Math.PI;
+	}
+	
+	protected void createBody()
+	{
+		body.add(new SnakePart().init(getCX()+getWidth(), getCY(), 0, 0, 0, 0, world, this));
 		for(int q=0;q<8;q++)
 		{
 			SnakePart part = body.get(body.size()-1);
 			body.add((SnakePart) new SnakePart().init(part.getCX()+part.getWidth(), part.getCY()-part.getHeight()/2, 0, 0, 0, 0, world, part));
 		}
 		SnakePart part = body.get(body.size()-1);
-		body.add((SnakePart) new SnakeTail().init(part.getCX()+part.getWidth(), part.getCY(), 0, 0, 0, 0, world, part));
-		
-		bodyPath = new Path(getCX(), getCY());
-		angle = Math.PI;
+		body.add(new SnakeTail().init(part.getCX()+part.getWidth(), part.getCY(), 0, 0, 0, 0, world, part));
 	}
-	
-//	private boolean speedUp = false;
 	
 	@Override
 	public void tick()
@@ -84,43 +87,26 @@ public class SnakeHead extends SnakePart
 //		speedUp = true;
 //	}
 	
-	private double criticalAngle = Math.PI/4; 
-	
 	@Override
 	public void onLeft()
 	{
-//		if(getAngle(getX() - backPart.getX(), getY() - backPart.getY())-criticalAngle)
-		int k;
-//		if(speedUp)
-//		{
-//			k = 70;
-//		}
-//		else
-			k = 40;
-		angle -= Math.PI/k;
+		angle -= Math.PI/40;
 	}
 	@Override
 	public void onRight()
 	{
-		int k;
-//		if(speedUp)
-//		{
-//			k = 70;
-//		}
-//		else
-			k = 40;
-		angle += Math.PI/k;
+		angle += Math.PI/40;
 	}
 
     @Override
     public void damage(int damage, int knockback, double dir)
 	{	
-		if(damage == 0) return;
-		hp -= Math.max(damage - getStrength(), 0);
-		for(int q=0;q<1;q++)
-		{
-			new Blood(getCX(), getCY(), world);
-		}
+//		if(damage == 0) return;
+//		hp -= Math.max(damage - getStrength(), 0);
+//		for(int q=0;q<1;q++)
+//		{
+//			new Blood(getCX(), getCY(), world);
+//		}
 	}	
     @Override
     protected void initPictures() 
@@ -184,7 +170,7 @@ public class SnakeHead extends SnakePart
 		control.feeded();
 	}
 	
-	private void addBody()
+	protected void addBody()
 	{
 		SnakePart nbp = new SnakePart();
 		SnakeTail tail = (SnakeTail) body.get(body.size()-1);
@@ -209,6 +195,8 @@ public class SnakeHead extends SnakePart
 	
 	public void setNewWeapon(Weapon wep)
 	{
+		if(this.wep != null) this.wep.delete();
+		
 		this.wep = wep.init(getCX(), getCY(), 0, 0, 0, 0, world, this);
 	}
 }

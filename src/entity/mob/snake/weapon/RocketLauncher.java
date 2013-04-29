@@ -9,9 +9,7 @@ import entity.mob.snake.weapon.shell.Rocket;
 
 public class RocketLauncher extends Weapon
 {
-	private Image img;
-
-	private static int cooldown = 60;
+	private static int cooldown = 40;
 	private int currentCooldown = 0;
 	
 	private static double rocketSpeed = 16;
@@ -38,19 +36,6 @@ public class RocketLauncher extends Weapon
     @Override
     protected void initPictures() 
     {
-    	img = Pictures.blood;
-    }
-    
-    @Override
-    public void draw(Graphics2D g)
-    {
-    	int drawx = (int) (owner.getCX()-Game.x);
-    	int drawy = (int) (owner.getCY()-Game.y);
-
-		double angle = owner.getAngle();
-		  
-		g.rotate(angle-Math.PI/2, drawx, drawy);
-		g.drawImage(img, drawx-img.getWidth(null)/2, drawy-img.getHeight(null)/4, null);
-		g.rotate(-angle+Math.PI/2, drawx, drawy);
+    	img = Pictures.rocket_item;
     }
 }

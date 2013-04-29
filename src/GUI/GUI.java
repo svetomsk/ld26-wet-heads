@@ -73,8 +73,9 @@ public class GUI extends Controller
         
 		if(input.wheelClicked)
 		{
-			new Enemy().init(0, 0, mob.getWorld());
-			mob.getWorld().spawnRandomBonus();
+//			new Enemy().init(0, 0, mob.getWorld());
+//			mob.getWorld().spawnRandomBonus();
+			
 //			new Angel().init((input.x+Game.x), (input.y+Game.y), mob.getWorld());
 //			new DamageMignonSeed((input.x+Game.x), (input.y+Game.y), mob.getWorld());
 //			new JumpMignon((input.x+Game.x), (input.y+Game.y), mob.getWorld(), mob);
@@ -88,7 +89,7 @@ public class GUI extends Controller
 	private boolean feeded = false; 
 	public void feeded()
 	{
-		if(mob.body.size()>72 && !feeded)
+		if(mob.body.size()>150 && !feeded)
 		{
 			feeded = true;
 			stepState = false;
