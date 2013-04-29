@@ -124,7 +124,7 @@ public class SnakeHead extends SnakePart
 		g.rotate(-angle-Math.PI/2, drawx, drawy);
         
 //		drawBounds(g);
-		drawHealth(g);
+//		drawHealth(g);
     }
     @Override
 	public double getSpeed()
