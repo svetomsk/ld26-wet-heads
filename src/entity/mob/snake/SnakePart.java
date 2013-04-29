@@ -64,34 +64,34 @@ public class SnakePart extends Mob
     @Override
     public void tick()
     {
-//    	prevX = x;
-//    	prevY = y;
-//    	prevAngle = angle;
-//
-//    	if(frontPart != null)
-//    	{
-//	    	x = frontPart.getPrevX();
-//	    	y = frontPart.getPrevY();
-//	    	angle = frontPart.getPrevAngle();
-//    	}
+    	prevX = x;
+    	prevY = y;
+    	prevAngle = angle;
+
+    	if(frontPart != null)
+    	{
+	    	x = frontPart.getPrevX();
+	    	y = frontPart.getPrevY();
+	    	angle = frontPart.getPrevAngle();
+    	}
     	
     	super.tick();
     			
-    	if(frontPart == null) return;
-    	if(backPart == null) return;
-    	
-    	double dx = frontPart.get—X() - backPart.get—X();
-    	double dy = frontPart.get—Y() - backPart.get—Y();
-    	
-    	angle = getAngle(dx, dy) - Math.PI/2;
-    	
-    	double r2 = (frontPart.get—X()-get—X())*(frontPart.get—X()-get—X()) + (frontPart.get—Y()-get—Y())*(frontPart.get—Y()-get—Y());
-    	
-    	if(segment_gap*segment_gap < r2)
-    	{
-    		setX((long) (frontPart.get—X() + segment_gap*Math.cos(angle)));
-    		setY((long) (frontPart.get—Y() + segment_gap*Math.sin(angle)));
-    	}
+//    	if(frontPart == null) return;
+//    	if(backPart == null) return;
+//    	
+//    	double dx = frontPart.get—X() - backPart.get—X();
+//    	double dy = frontPart.get—Y() - backPart.get—Y();
+//    	
+//    	angle = getAngle(dx, dy) - Math.PI/2;
+//    	
+//    	double r2 = (frontPart.get—X()-get—X())*(frontPart.get—X()-get—X()) + (frontPart.get—Y()-get—Y())*(frontPart.get—Y()-get—Y());
+//    	
+//    	if(segment_gap*segment_gap < r2)
+//    	{
+//    		setX((long) (frontPart.get—X() + segment_gap*Math.cos(angle)));
+//    		setY((long) (frontPart.get—Y() + segment_gap*Math.sin(angle)));
+//    	}
     }
     
     @Override

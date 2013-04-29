@@ -55,9 +55,9 @@ public class SnakeHead extends SnakePart
 	
 	private boolean speedUp = false;
 	
-//	private double fluct = 0;
-//	private double deltaFluct = 0.01;
-//	private double borderFluct = 1.0/12;
+	private double fluct = 0;
+	private double deltaFluct = 0.01;
+	private double borderFluct = 1.0/12;
 	
 	@Override
 	public void tick()
@@ -68,13 +68,13 @@ public class SnakeHead extends SnakePart
 		speedUp = false;
 		super.tick();
 		
-//		fluct += deltaFluct;
-//		if(Math.abs(fluct)>borderFluct)
-//		{
-//			deltaFluct *= -1;
-//		}
-//		
-//		prevAngle = angle + fluct * Math.PI;
+		fluct += deltaFluct;
+		if(Math.abs(fluct)>borderFluct)
+		{
+			deltaFluct *= -1;
+		}
+		
+		prevAngle = angle + fluct * Math.PI;
 		
 		lvx = v*Math.cos(angle);
 		lvy = v*Math.sin(angle);
