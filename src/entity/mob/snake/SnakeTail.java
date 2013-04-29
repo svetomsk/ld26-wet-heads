@@ -32,11 +32,6 @@ public class SnakeTail extends SnakePart
     		setY((long) (frontPart.getY() + segment_gap*Math.sin(angle)));
     	}
 	}
-	@Override
-	public void damage(int damage, int knockback, double dir)
-	{
-		super.damage(damage, 0, dir);
-	}
     @Override
     protected void initPictures() 
     {

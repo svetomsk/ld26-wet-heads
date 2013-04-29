@@ -9,7 +9,6 @@ import java.io.IOException;
 import main.Game;
 import main.Input;
 import main.Pictures;
-import entity.mob.Angel;
 import entity.mob.Mob;
 import entity.mob.controllers.Controller;
 import entity.mob.snake.SnakeHead;
@@ -47,7 +46,11 @@ public class GUI extends Controller
         //throw item
         if(input.space.typed)
         {
-        	mob.getWep().use();
+        	try
+        	{
+        		mob.getWep().use();
+        	}
+        	catch(NullPointerException ex){}
         }
         if(input.q.typed)
         {
@@ -68,9 +71,10 @@ public class GUI extends Controller
         
     	//----------------------------------------------------------
         
-		if(input.wheel)
+		if(input.wheelClicked)
 		{
-			new Angel().init((input.x+Game.x), (input.y+Game.y), mob.getWorld());
+			mob.getWorld().spawnRandomBonus();
+//			new Angel().init((input.x+Game.x), (input.y+Game.y), mob.getWorld());
 //			new DamageMignonSeed((input.x+Game.x), (input.y+Game.y), mob.getWorld());
 //			new JumpMignon((input.x+Game.x), (input.y+Game.y), mob.getWorld(), mob);
 //			new DamageMignon((input.x+Game.x), (input.y+Game.y), mob.getWorld(), mob);

@@ -12,14 +12,16 @@ public class Boom extends Entity
 {
 	private Image img;
 	
-	private int size = 0;
+	private int size = 32;
 	
 	@Override
 	public void tick()
 	{
-		size++;
+		size+=16;
+		x-=8;
+		y-=8;
 		
-		if(size > 128)
+		if(size > 512)
 		{
 			delete();
 		}
@@ -28,9 +30,15 @@ public class Boom extends Entity
 	}
 	
 	@Override
+	protected boolean collideIslands(boolean verticalWalls)
+	{
+		return false;
+	}
+	
+	@Override
 	protected boolean interactOnMob(Mob mob)
 	{
-		mob.damage(30, 0, 0);
+		mob.damage(10, 0, 0);
 		return true;
 	}
 	
@@ -46,20 +54,7 @@ public class Boom extends Entity
     	int drawx = (int) (getX()-Game.x);
     	int drawy = (int) (getY()-Game.y);
 
-    	
-		g.drawImage(img, drawx-img.getWidth(null)/2, drawy-img.getHeight(null)/4, null);
-        
-//        double angle = getAngle(control.getX()-drawx, control.getY()-drawy)+Math.PI/2;
-        
-//        Image eye = control.getX()-drawx >= 0 ? Pictures.eye_right : Pictures.eye_left;
-//        if(control.getX()-drawx < 0 ) angle -= Math.PI;
-//        
-//        g.rotate(angle, drawx, drawy);
-//        g.drawImage(eye, drawx-width/2, drawy-height/2, null);
-//        g.rotate(-angle, drawx, drawy);
-        
-//        super.draw(g);
-//        drawHealth(g);
+		g.drawImage(img, drawx-img.getWidth(null)/2, drawy-img.getHeight(null)/2, null);
 		drawBounds(g);
     }
     

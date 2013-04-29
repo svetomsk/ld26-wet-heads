@@ -109,8 +109,6 @@ public class Game extends Canvas implements Runnable
 		{
 //			init();
 		}
-		world.findCharacter();
-		
         requestFocus();
     }
     
@@ -259,7 +257,6 @@ public class Game extends Canvas implements Runnable
 		try
 		{
 			world = Date.load(name);
-			world.findCharacter();
 			gui.stepState = false;
 			nextTime = System.nanoTime();
 		} catch (IOException e)
@@ -275,8 +272,8 @@ public class Game extends Canvas implements Runnable
     private static int levelNumber = 1;
     public static void nextLevel()
     {
-    	world.createLevel(++levelNumber);
-    	nextTime = System.nanoTime();
+    	levelNumber++;
+    	world.createLevel(levelNumber);
     }
     public static void finishLevel() throws IOException
     {
@@ -442,7 +439,7 @@ public class Game extends Canvas implements Runnable
                 frame.setVisible(true);
             }
         });
-        death.add(quickLoad);
+//        death.add(quickLoad);
         death.add(playAgain);
         death.add(mainMenu);
     }
