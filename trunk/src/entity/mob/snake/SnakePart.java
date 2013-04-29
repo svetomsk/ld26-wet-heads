@@ -28,12 +28,12 @@ public class SnakePart extends Mob
 	
 	protected static int segment_gap = 20;
 	
-	public Entity init(long x, long y, double lvx, double lvy, double gvx, double gvy, World world, SnakePart nextPart)
+	public SnakePart init(long x, long y, double lvx, double lvy, double gvx, double gvy, World world, SnakePart nextPart)
 	{
 		this.frontPart = nextPart;
 		this.head = frontPart.head;
 		frontPart.setBackPart(this);
-		return super.init(x, y, lvx, lvy, gvx, gvy, world);
+		return (SnakePart) super.init(x, y, lvx, lvy, gvx, gvy, world);
 	}
 	
 	protected void setBackPart(SnakePart backPart)
@@ -59,9 +59,9 @@ public class SnakePart extends Mob
 	@Override
 	public void damage(int damage, int knockback, double dir)
 	{
-		if(damage == 0) return;
-		new Blood(getCX(), getCY(), world);
-		head.damage(damage, 0, 0);
+//		if(damage == 0) return;
+//		new Blood(getCX(), getCY(), world);
+//		head.damage(damage, 0, 0);
 	}
     @Override
     public void tick()

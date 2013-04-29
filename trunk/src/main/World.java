@@ -15,6 +15,7 @@ import particle.Particle;
 import block.Block;
 import entity.Entity;
 import entity.mob.Character;
+import entity.mob.Enemy;
 import entity.mob.snake.weapon.shell.Boom;
 
 public class World
@@ -47,6 +48,7 @@ public class World
 		entities = new ArrayList<Entity>();
 		particles = new ArrayList<Particle>();
 		apple_quantity = 0;
+		Enemy.quantity = 0;
 	}
 
 	public void createLevel(int n)
@@ -170,6 +172,14 @@ public class World
 		{
 			spawn(new Apple());
 			apple_quantity++;
+		}
+		if(Math.random() > 0.997)
+		{
+			spawnRandomBonus();
+		}
+		if(Math.random() > 0.999)
+		{
+			spawn(new Enemy());
 		}
 
 //        for(int q=0;q<islands.size();q++)

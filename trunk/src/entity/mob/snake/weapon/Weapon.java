@@ -12,7 +12,7 @@ import entity.mob.Mob;
 public class Weapon extends Entity
 {
 	protected Mob owner;
-	private Image img;
+	protected Image img;
 	
 	public Weapon init(long x, long y, double lvx, double lvy, double gvx, double gvy, World world, Mob owner)
 	{
@@ -34,26 +34,18 @@ public class Weapon extends Entity
     @Override
     public void draw(Graphics2D g)
     {
-    	int drawx = (int) (getCX()-Game.x);
-    	int drawy = (int) (getCY()-Game.y);
+    	int drawx = (int) (owner.getCX()-Game.x);
+    	int drawy = (int) (owner.getCY()-Game.y);
 
 		double angle = owner.getAngle();
-		  
-		g.rotate(angle-Math.PI/2, drawx, drawy);
-		g.drawImage(img, drawx-img.getWidth(null)/2, drawy-img.getHeight(null)/4, null);
-		g.rotate(-angle+Math.PI/2, drawx, drawy);
+		double k = 0.5;  
+		
+		g.rotate(angle+Math.PI/2, drawx, drawy);
+		g.scale(k, k);
+		g.drawImage(img, (int)( ( drawx-img.getWidth(null)/4 )/k ), (int) ( ( drawy-img.getHeight(null)/2 )/k ), null);
+		g.scale(1/k, 1/k);
+		g.rotate(-angle-Math.PI/2, drawx, drawy);
         
-//        double angle = getAngle(control.getX()-drawx, control.getY()-drawy)+Math.PI/2;
-        
-//        Image eye = control.getX()-drawx >= 0 ? Pictures.eye_right : Pictures.eye_left;
-//        if(control.getX()-drawx < 0 ) angle -= Math.PI;
-//        
-//        g.rotate(angle, drawx, drawy);
-//        g.drawImage(eye, drawx-width/2, drawy-height/2, null);
-//        g.rotate(-angle, drawx, drawy);
-        
-//        super.draw(g);
-//        drawHealth(g);
-		drawBounds(g);
+//		drawBounds(g);
     }
 }

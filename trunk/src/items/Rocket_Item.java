@@ -16,7 +16,7 @@ public class Rocket_Item extends Item{
 	@Override
 	protected void initPictures()
 	{
-		img = Pictures.rocket;
+		img = Pictures.rocket_item;
 	}
 	
 	@Override

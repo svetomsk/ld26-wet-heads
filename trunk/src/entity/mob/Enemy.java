@@ -53,7 +53,7 @@ public class Enemy extends Mob
 	{	
 		if(damage == 0) return;
 		hp -= Math.max(damage - getStrength(), 0);
-		for(int q=0;q<5;q++)
+		for(int q=0;q<2;q++)
 		{
 			new Blood(getCX(), getCY(), world);
 		}
@@ -64,7 +64,7 @@ public class Enemy extends Mob
     	super.onDeath();
     	quantity--;
     }
-    private static int quantity = 0;
+    public static int quantity = 0;
     @Override
     public void feed() 
     {

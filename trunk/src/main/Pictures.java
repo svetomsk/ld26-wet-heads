@@ -3,13 +3,10 @@ package main;
 import java.awt.Canvas;
 import java.awt.Image;
 import java.awt.image.AreaAveragingScaleFilter;
-import java.awt.image.BufferedImage;
 import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
@@ -22,11 +19,15 @@ public class Pictures
     public static Image complete_level[];
     public static Image blood;
     
+    public static Image flame_item;
+    public static Image poison_item;
+    public static Image snow_item;
+    public static Image rocket_item = read("resources/rocket_item.png", 64, 64);
+    
+    public static Image snow;
     public static Image rocket;
     public static Image flame;
     public static Image poison;
-    public static Image flame_item;
-    public static Image poison_item;
     
     public static Image level[];
 
@@ -37,12 +38,17 @@ public class Pictures
     public static Image apple;
     public static Image pear;
 
-    public static Image snow_item;
-    public static Image snow;
     
     public static Image spark1 = read("resources/spark1.png", 16, 16);
     public static Image spark2 = read("resources/spark2.png", 16, 16);
     public static Image spark3 = read("resources/spark3.png", 16, 16);
+
+    public static Image simpleSnakePart = read("resources/simplebodysnake.png", 32, 32);
+    public static Image simpleSnakeHead = read("resources/simpleheadsnake.png", 48, 48);
+    public static Image simpleSnakeTail = read("resources/simpletailsnake.png", 64, 48);
+
+	public static Image explode = read("resources/explode.png", 512, 512);
+
     
     public Pictures()
     {

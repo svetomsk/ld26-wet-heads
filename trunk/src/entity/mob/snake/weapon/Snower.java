@@ -9,8 +9,6 @@ import entity.mob.snake.weapon.shell.Snow;
 
 public class Snower extends Weapon
 {
-	private Image img;
-
 	private static int cooldown = 60;
 	private int currentCooldown = 60;
 	
@@ -38,19 +36,6 @@ public class Snower extends Weapon
     @Override
     protected void initPictures() 
     {
-    	img = Pictures.blood;
-    }
-    
-    @Override
-    public void draw(Graphics2D g)
-    {
-    	int drawx = (int) (owner.getCX()-Game.x);
-    	int drawy = (int) (owner.getCY()-Game.y);
-
-		double angle = owner.getAngle();
-		  
-		g.rotate(angle-Math.PI/2, drawx, drawy);
-		g.drawImage(img, drawx-img.getWidth(null)/2, drawy-img.getHeight(null)/4, null);
-		g.rotate(-angle+Math.PI/2, drawx, drawy);
+    	img = Pictures.snow_item;
     }
 }

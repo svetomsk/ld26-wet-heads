@@ -13,6 +13,7 @@ public class Boom extends Entity
 	private Image img;
 	
 	private int size = 16;
+	private double angle = Math.random()*Math.PI*2;
 	
 	@Override
 	public void tick()
@@ -45,7 +46,7 @@ public class Boom extends Entity
     @Override
     protected void initPictures() 
     {
-    	img = Pictures.blood;
+    	img = Pictures.explode;
     }
     
     @Override
@@ -53,9 +54,16 @@ public class Boom extends Entity
     {
     	int drawx = (int) (getCX()-Game.x);
     	int drawy = (int) (getCY()-Game.y);
+    	
+    	double k = size/512.0;
 
-		g.drawImage(img, drawx-img.getWidth(null)/2, drawy-img.getHeight(null)/2, null);
-		drawBounds(g);
+    	g.rotate(angle, drawx, drawy);
+    	g.scale(k, k);
+		g.drawImage(img, (int) ( (drawx-getWidth()/2) / k ), (int) ( (drawy-getWidth()/2) / k ), null);
+		g.scale(1/k, 1/k);
+		g.rotate(-angle, drawx, drawy);
+		
+//		drawBounds(g);
     }
     
     @Override

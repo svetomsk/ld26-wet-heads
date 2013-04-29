@@ -16,6 +16,7 @@ import main.saving.IDManager;
 import block.Block;
 import entity.mob.Angel;
 import entity.mob.Mob;
+import entity.mob.snake.SimpleSnakeHead;
 import entity.mob.snake.SnakeHead;
 
 public class Entity {
@@ -386,7 +387,7 @@ public class Entity {
                                 }
                                 else if(b == 126)
                                 {
-//                                      new Butterfly().init(x, y, world);
+                                	new SimpleSnakeHead().init(x, y, world);
                                         continue;
                                 }
                                 else if(b == 125)
