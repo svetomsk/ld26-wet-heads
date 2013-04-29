@@ -17,6 +17,10 @@ public class SnakePart extends Mob
 {
 	protected Image img;
 	
+	protected long prevX;
+	protected long prevY;
+	protected double prevAngle;
+	
 	protected SnakePart frontPart;
 	protected SnakePart backPart;
 	protected double angle;
@@ -60,8 +64,19 @@ public class SnakePart extends Mob
     @Override
     public void tick()
     {
+//    	prevX = x;
+//    	prevY = y;
+//    	prevAngle = angle;
+//
+//    	if(frontPart != null)
+//    	{
+//	    	x = frontPart.getPrevX();
+//	    	y = frontPart.getPrevY();
+//	    	angle = frontPart.getPrevAngle();
+//    	}
+    	
     	super.tick();
-
+    			
     	if(frontPart == null) return;
     	if(backPart == null) return;
     	
@@ -77,23 +92,6 @@ public class SnakePart extends Mob
     		setX((long) (frontPart.get—X() + segment_gap*Math.cos(angle)));
     		setY((long) (frontPart.get—Y() + segment_gap*Math.sin(angle)));
     	}
-//    	if(backPart == null) return;
-    	
-//    	double dx = frontPart.getX() + getWidth()*Math.cos(angle);    	
-//    	double dy = frontPart.getY() + getWidth()*Math.sin(angle);
-//    	
-//    	System.out.println(getWidth() * Math.cos(angle));
-//    	
-//    	
-//    	angle = getAngle(dx, dy) - Math.PI/2;
-//    	
-//    	double r2 = (frontPart.getX()-getX())*(frontPart.getX()-getX()) + (frontPart.getY()-getY())*(frontPart.getY()-getY());
-//    	
-//    	if(getWidth()*getWidth() < r2)
-//    	{
-//    		setX((long) (frontPart.getX() + getWidth()*Math.cos(angle)));
-//    		setY((long) (frontPart.getY() + getWidth()*Math.sin(angle)));
-//    	}
     }
     
     @Override
@@ -156,5 +154,18 @@ public class SnakePart extends Mob
 	public int getHeight()
 	{
 		return 48;
+	}
+	
+	public long getPrevX() 
+	{
+		return prevX;
+	}
+	public long getPrevY() 
+	{
+		return prevY;
+	}
+	public double getPrevAngle() 
+	{
+		return prevAngle;
 	}
 }
