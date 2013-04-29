@@ -169,7 +169,7 @@ public class Level
             Random r = new Random();
             int genx = 0 + r.nextInt(n);
             int geny = 0 + r.nextInt(m);
-            if(field[genx][geny] == 0)
+            if(field[genx][geny] == 0 && genx > 0 && geny > 0)
             {
                 applex = geny;
                 appley = genx;
