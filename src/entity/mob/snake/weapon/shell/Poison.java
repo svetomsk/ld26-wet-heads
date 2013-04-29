@@ -16,7 +16,7 @@ public class Poison extends Shell
 	{
 		if(mob.getGroup() != owner.getGroup())
 		{
-			mob.damage(100, 0, 0);
+			mob.damage(1000, 0, 0);
 			delete();
 		}
 		return super.interactOnMob(mob);

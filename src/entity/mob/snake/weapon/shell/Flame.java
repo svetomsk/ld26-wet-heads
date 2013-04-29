@@ -16,7 +16,7 @@ public class Flame extends Shell
 	{
 		if(mob.getGroup() != owner.getGroup())
 		{
-			mob.damage(100, 0, 0);
+			mob.damage(40, 0, 0);
 			delete();
 		}
 		return super.interactOnMob(mob);
@@ -27,11 +27,22 @@ public class Flame extends Shell
 	{
 		delete();
 	}
-	
     @Override
     protected void initPictures() 
     {
-    	img = Pictures.flame;
+    	double r = Math.random();
+    	if(r>0.66)
+    	{
+    		img = Pictures.spark1;
+    	}
+    	else if(r>0.33)
+    	{
+    		img = Pictures.spark2;
+    	}
+    	else
+    	{
+    		img = Pictures.spark3;
+    	}
     }
     @Override
     public void draw(Graphics2D g)
@@ -44,6 +55,16 @@ public class Flame extends Shell
 		g.rotate(angle-Math.PI/2, drawx, drawy);
 		g.drawImage(img, drawx-img.getWidth(null)/2, drawy-img.getHeight(null)/4, null);
 		g.rotate(-angle+Math.PI/2, drawx, drawy);
-        
+    }
+    
+    @Override
+    public int getWidth() 
+    {
+    	return 16;
+    }
+    @Override
+    public int getHeight() 
+    {
+    	return 16;
     }
 }

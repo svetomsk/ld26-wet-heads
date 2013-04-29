@@ -40,6 +40,10 @@ public class Pictures
     public static Image snow_item;
     public static Image snow;
     
+    public static Image spark1 = read("resources/spark1.png", 16, 16);
+    public static Image spark2 = read("resources/spark2.png", 16, 16);
+    public static Image spark3 = read("resources/spark3.png", 16, 16);
+    
     public Pictures()
     {
         try 
@@ -129,6 +133,24 @@ public class Pictures
         	ex.printStackTrace();
 //            Logger.getLogger(Pictures.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    private static Image read(String str, int w, int h)
+    {
+    	Image res = null;
+    	try 
+        {
+    		res = ImageIO.read(new File(str));
+    		
+    		Canvas s = new Canvas();
+            AreaAveragingScaleFilter aasf = new AreaAveragingScaleFilter(w, h);
+            res = s.createImage(new FilteredImageSource(res.getSource(), aasf));
+        }
+    	catch (IOException ex) 
+        {
+        	ex.printStackTrace();
+//            Logger.getLogger(Pictures.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    	return res;
     }
     public static Image[] loadAndCut(String name, int sw, int scale) 
     {

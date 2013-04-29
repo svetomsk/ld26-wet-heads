@@ -21,6 +21,7 @@ public class SnakePart extends Mob
 	protected long prevY;
 	protected double prevAngle;
 	
+	protected SnakeHead head;
 	protected SnakePart frontPart;
 	protected SnakePart backPart;
 //	protected double angle;
@@ -30,6 +31,7 @@ public class SnakePart extends Mob
 	public Entity init(long x, long y, double lvx, double lvy, double gvx, double gvy, World world, SnakePart nextPart)
 	{
 		this.frontPart = nextPart;
+		this.head = frontPart.head;
 		frontPart.setBackPart(this);
 		return super.init(x, y, lvx, lvy, gvx, gvy, world);
 	}
@@ -59,7 +61,7 @@ public class SnakePart extends Mob
 	{
 		if(damage == 0) return;
 		new Blood(getCX(), getCY(), world);
-		frontPart.damage(damage, 0, 0);
+		head.damage(damage, 0, 0);
 	}
     @Override
     public void tick()

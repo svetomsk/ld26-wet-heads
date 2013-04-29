@@ -11,28 +11,15 @@ public class Flamer extends Weapon
 {
 	private Image img;
 
-	private static int cooldown = 60;
-	private int currentCooldown = 60;
-	
 	private static double flameSpeed = 16;
 	
 	@Override
 	public void use(double angle)
 	{
-		if(currentCooldown < 0)
-		{
-			new Flame().init(owner.getCX(), owner.getCY(),
-				Math.cos(angle)*flameSpeed, Math.sin(angle)*flameSpeed,
-				0, 0, owner.getWorld(), owner);
-			currentCooldown = cooldown;
-		}
-	}
-	
-	@Override
-	public void tick()
-	{
-		super.tick();
-		currentCooldown--;
+		angle += Math.PI*(Math.random()-0.5)/6;
+		new Flame().init(owner.getCX(), owner.getCY(),
+			Math.cos(angle)*flameSpeed, Math.sin(angle)*flameSpeed,
+			0, 0, owner.getWorld(), owner);
 	}
 	
     @Override
@@ -40,7 +27,6 @@ public class Flamer extends Weapon
     {
     	img = Pictures.blood;
     }
-    
     @Override
     public void draw(Graphics2D g)
     {

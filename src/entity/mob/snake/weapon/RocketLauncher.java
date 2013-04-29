@@ -12,7 +12,7 @@ public class RocketLauncher extends Weapon
 	private Image img;
 
 	private static int cooldown = 60;
-	private int currentCooldown = 60;
+	private int currentCooldown = 0;
 	
 	private static double rocketSpeed = 16;
 	
