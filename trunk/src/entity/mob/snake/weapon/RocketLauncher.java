@@ -10,14 +10,28 @@ import entity.mob.snake.weapon.shell.Rocket;
 public class RocketLauncher extends Weapon
 {
 	private Image img;
+
+	private static int cooldown = 60;
+	private int currentCooldown = 60;
 	
-	private static double rocketSpeed = 8;
+	private static double rocketSpeed = 16;
 	
 	public void use()
 	{
-		new Rocket().init(owner.getX(), owner.getY(),
+		if(currentCooldown < 0)
+		{
+			new Rocket().init(owner.getX(), owner.getY(),
 				Math.cos(owner.getAngle())*rocketSpeed, Math.sin(owner.getAngle())*rocketSpeed,
 				0, 0, owner.getWorld(), owner);
+			currentCooldown = cooldown;
+		}
+	}
+	
+	@Override
+	public void tick()
+	{
+		super.tick();
+		currentCooldown--;
 	}
 	
     @Override

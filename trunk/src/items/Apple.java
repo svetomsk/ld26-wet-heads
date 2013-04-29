@@ -22,7 +22,14 @@ public class Apple extends Item{
 	@Override
 	protected void initPictures()
 	{
-		img = Pictures.apple;
+		if( Math.random()>0.5 )
+		{
+			img = Pictures.apple;
+		}
+		else
+		{
+			img = Pictures.pear;
+		}
 	}
 	
 	@Override
@@ -40,16 +47,5 @@ public class Apple extends Item{
     	int drawy = (int) (getY()-Game.y);
 		g.drawImage(img, drawx-img.getWidth(null)/2, drawy-img.getHeight(null)/2, null);
 //		drawBounds(g);
-	}
-	
-	@Override
-	public int getWidth()
-	{
-		return 32;
-	}
-	@Override
-	public int getHeight()
-	{
-		return 32;
 	}
 }

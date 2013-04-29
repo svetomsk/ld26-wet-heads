@@ -9,6 +9,7 @@ import main.World;
 import entity.Entity;
 import entity.mob.Mob;
 import entity.mob.controllers.Controller;
+import entity.mob.controllers.Group;
 
 public class SnakePart extends Mob
 {
@@ -27,8 +28,6 @@ public class SnakePart extends Mob
 		return super.init(x, y, lvx, lvy, gvx, gvy, world);
 	}
 	
-	
-	
 	protected void setBackPart(SnakePart backPart)
 	{
 		this.backPart = backPart; 
@@ -43,12 +42,16 @@ public class SnakePart extends Mob
 	{
 		super.finalInit(world);
 		control = new Controller(this);
+		
+		group.removeMob(this);
+		Group.character.addMob(this);
+		group = Group.character;
 	}
 	
 	@Override
 	public void damage(int damage, int knockback, double dir)
 	{
-		super.damage(damage, 0, dir);
+		frontPart.damage(damage, 0, 0);
 	}
     @Override
     public void tick()

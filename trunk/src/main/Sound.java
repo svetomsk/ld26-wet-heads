@@ -28,7 +28,7 @@ class Song
     
     public void play()
     {
-//       ac.play();
+       ac.play();
     }
 
     public static double getLength(URL path) throws Exception
@@ -52,10 +52,10 @@ class Song
 class TrackList 
 {
     
-    static private int current_time, index, n = 1;  
+    static private int current_time, index, n = 2;  
     
     static private Song current;
-    static String [] filenames = {"resources/s.wav"};
+    static String [] filenames = {"resources/track1.wav", "resources/track2.wav"};
     static private Song[] tracks = createList();
     
     static public Song[] createList()

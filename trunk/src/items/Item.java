@@ -141,11 +141,11 @@ public class Item extends Entity{
 	@Override
 	public int getWidth()
 	{
-		return width;
+		return 32;
 	}
 	@Override
 	public int getHeight()
 	{
-		return width;
+		return 32;
 	}
 }

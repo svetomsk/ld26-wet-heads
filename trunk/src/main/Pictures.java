@@ -3,6 +3,7 @@ package main;
 import java.awt.Canvas;
 import java.awt.Image;
 import java.awt.image.AreaAveragingScaleFilter;
+import java.awt.image.BufferedImage;
 import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
 import java.io.File;
@@ -21,6 +22,12 @@ public class Pictures
     public static Image complete_level[];
     public static Image blood;
     
+    public static Image rocket;
+    public static Image flame;
+    public static Image poison;
+    public static Image flame_item;
+    public static Image poison_item;
+    
     public static Image level[];
 
     public static Image bodysnake;
@@ -28,6 +35,10 @@ public class Pictures
     public static Image headsnake;
     
     public static Image apple;
+    public static Image pear;
+
+    public static Image snow_item;
+    public static Image snow;
     
     public Pictures()
     {
@@ -41,7 +52,17 @@ public class Pictures
             
         	blood = ImageIO.read(new File("resources/blood.png"));
         	
+        	rocket = ImageIO.read(new File("resources/rocket.png"));
+        	flame = ImageIO.read(new File("resources/fireball.png"));
+        	poison = ImageIO.read(new File("resources/poison.png"));
+        	snow = ImageIO.read(new File("resources/snow.png"));
+        	
+        	poison_item = ImageIO.read(new File("resources/poison_item.png"));
+        	flame_item = ImageIO.read(new File("resources/fire_item.png"));
+        	snow_item = ImageIO.read(new File("resources/snow_item.png"));
+        	
         	apple = ImageIO.read(new File("resources/apple.png"));
+        	pear = ImageIO.read(new File("resources/pear.png"));
             
             level = new Image[3];
             level[0] = ImageIO.read(new File("resources/level1.png"));
@@ -58,8 +79,32 @@ public class Pictures
             aasf = new AreaAveragingScaleFilter(12, 12);
             blood= s.createImage(new FilteredImageSource(blood.getSource(), aasf));
             
+            aasf = new AreaAveragingScaleFilter(32, 75);
+            rocket = s.createImage(new FilteredImageSource(rocket.getSource(), aasf));
+            
+            aasf = new AreaAveragingScaleFilter(32, 75);
+            flame = s.createImage(new FilteredImageSource(flame.getSource(), aasf));
+            
+            aasf = new AreaAveragingScaleFilter(32, 75);
+            snow = s.createImage(new FilteredImageSource(snow.getSource(), aasf));
+            
+            aasf = new AreaAveragingScaleFilter(32, 86);
+            poison = s.createImage(new FilteredImageSource(poison.getSource(), aasf));
+            
             aasf = new AreaAveragingScaleFilter(64, 64);
             apple = s.createImage(new FilteredImageSource(apple.getSource(), aasf));
+            
+            aasf = new AreaAveragingScaleFilter(64, 64);
+            flame_item = s.createImage(new FilteredImageSource(flame_item.getSource(), aasf));
+            
+            aasf = new AreaAveragingScaleFilter(64, 64);
+            snow_item = s.createImage(new FilteredImageSource(snow_item.getSource(), aasf));
+            
+            aasf = new AreaAveragingScaleFilter(64, 64);
+            poison_item = s.createImage(new FilteredImageSource(poison_item.getSource(), aasf));
+            
+            aasf = new AreaAveragingScaleFilter(128, 128);
+            pear = s.createImage(new FilteredImageSource(pear.getSource(), aasf));
             
             aasf = new AreaAveragingScaleFilter(5130, 2550);
             level[0] = s.createImage(new FilteredImageSource(level[0].getSource(), aasf));

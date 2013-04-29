@@ -3,6 +3,8 @@ package entity.mob.snake;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
+import particle.Blood;
+
 import main.Game;
 import main.Pictures;
 import main.World;
@@ -35,22 +37,20 @@ public class SnakeHead extends SnakePart
 		control = (GUI) super.control;
 		Game.setGUI((GUI)control);
 		
-		
-		wep = new RocketLauncher().init(getX(), getY(), 0, 0, 0, 0, world, this);
-		
-		
 		group.removeMob(this);
 		Group.character.addMob(this);
 		group = Group.character;
 		
 		body.add((SnakePart) new SnakePart().init(getX()+getWidth(), getY(), 0, 0, 0, 0, world, this));
-		for(int q=0;q<4;q++)
+		for(int q=0;q<9;q++)
 		{
 			SnakePart part = body.get(body.size()-1);
 			body.add((SnakePart) new SnakePart().init(part.getX()+part.getWidth(), part.getY()-part.getHeight()/2, 0, 0, 0, 0, world, part));
 		}
 		SnakePart part = body.get(body.size()-1);
 		body.add((SnakePart) new SnakeTail().init(part.getX()+part.getWidth(), part.getY(), 0, 0, 0, 0, world, part));
+		
+		v = 9;
 	}
 	
 	@Override
@@ -60,19 +60,11 @@ public class SnakeHead extends SnakePart
 		lvy = v*Math.sin(angle);
 		super.tick();
 	}
-	@Override
-	protected void slowly()
-	{
-		v *= getSpeed()/(getSpeed()+1);
-	}
-	
-	@Override
-	public void damage(int damage, int knockback, double dir)
-	{
-//		if(cooldownAfterDamage>0) return;
-//		super.damage(damage, knockback, dir);
-//		cooldownAfterDamage = 12;
-	}
+//	@Override
+//	protected void slowly()
+//	{
+//		v *= getSpeed()/(getSpeed()+1);
+//	}
 	
 	private double criticalAngle = Math.PI/4; 
 	
@@ -87,19 +79,17 @@ public class SnakeHead extends SnakePart
 	{
 		angle += Math.PI/40;
 	}
-	
+
     @Override
-    public void onUp() 
-    {
-    	v++;
-    }
-    @Override
-	public void onDown()
-	{
-//    	if(v>0)
-//    	v--;
-	}
-    
+    public void damage(int damage, int knockback, double dir)
+	{	
+		if(damage == 0) return;
+		hp -= Math.max(damage - getStrength(), 0);
+		for(int q=0;q<7;q++)
+		{
+			new Blood(getX(), getY(), world);
+		}
+	}	
     @Override
     protected void initPictures() 
     {
@@ -127,7 +117,7 @@ public class SnakeHead extends SnakePart
 //        g.rotate(-angle, drawx, drawy);
         
 //        super.draw(g);
-//        drawHealth(g);
+        drawHealth(g);
 //		drawBounds(g);
     }
     @Override
@@ -143,7 +133,7 @@ public class SnakeHead extends SnakePart
     @Override
 	public int getMaxHP()
 	{
-		return 500;
+		return 8000;
 	}
     @Override
 	public int getDamage()
@@ -193,5 +183,10 @@ public class SnakeHead extends SnakePart
 	public int getSatiety()
 	{
 		return satiety;
+	}
+
+	public void setNewWeapon(Weapon wep)
+	{
+		this.wep = wep.init(getX(), getY(), 0, 0, 0, 0, world, this);
 	}
 }

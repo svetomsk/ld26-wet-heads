@@ -1,6 +1,10 @@
 package main;
 
 import items.Apple;
+import items.Flame_item;
+import items.Poison_item;
+import items.Rocket_Item;
+import items.Snow_item;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -61,16 +65,16 @@ public class World
 	{
 		byte[][] arr = ImageParser.getArr();//parseBlocks("resources/firstIsland.png");
 		Entity.parse(arr, this);
-		findCharacter();
+//		findCharacter();
 	}
 
-	public void findCharacter()
-	{
-		for (Entity e : entities)
-		{
-			if (e instanceof Character) character = (Character) e;
-		}
-	}
+//	public void findCharacter()
+//	{
+//		for (Entity e : entities)
+//		{
+//			if (e instanceof Character) character = (Character) e;
+//		}
+//	}
 	public Character getCharacter()
 	{
 		return character;
@@ -82,11 +86,34 @@ public class World
 	{
 //		while(true)
 //		{
+		if(islands.size() == 0) return;
+		if(islands.get(0).blocks == null) return;
 			int x = (int) (islands.get(0).blocks.length*BLOCK_SIZE* (1/8+6*Math.random()/8) );
 			int y = (int) (islands.get(0).blocks[0].length*BLOCK_SIZE* (1/8+6*Math.random()/8) );
 			
 			entity.init(x, y, this);
 //		}
+	}
+	
+	public void spawnRandomBonus()
+	{
+		double r = Math.random();
+		if(r>0.75)
+		{
+			spawn(new Rocket_Item());
+		} 
+		else if(r>0.50)
+		{
+			spawn(new Flame_item());
+		}
+		else if(r>0.25)
+		{
+			spawn(new Poison_item());
+		}
+		else
+		{
+			spawn(new Snow_item());
+		}
 	}
 	
 	public void step()
@@ -215,7 +242,7 @@ public class World
 		{
 			p.draw(g);
 		}
-		g.setColor(Color.BLUE);
-		g.fillOval(-10 - Game.x, -10 - Game.y, 20, 20);
+//		g.setColor(Color.BLUE);
+//		g.fillOval(-10 - Game.x, -10 - Game.y, 20, 20);
 	}
 }

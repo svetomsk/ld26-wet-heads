@@ -44,6 +44,6 @@ public class Shell extends Entity
 		g.drawImage(img, drawx-img.getWidth(null)/2, drawy-img.getHeight(null)/4, null);
 		g.rotate(-angle+Math.PI/2, drawx, drawy);
         
-		drawBounds(g);
+//		drawBounds(g);
     }
 }
