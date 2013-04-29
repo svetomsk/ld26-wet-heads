@@ -20,7 +20,7 @@ public class Poisoner extends Weapon
 	{
 		if(currentCooldown < 0)
 		{
-			new Poison().init(owner.getÑX(), owner.getÑY(),
+			new Poison().init(owner.getCX(), owner.getCY(),
 				Math.cos(owner.getAngle())*rocketSpeed, Math.sin(owner.getAngle())*rocketSpeed,
 				0, 0, owner.getWorld(), owner);
 			currentCooldown = cooldown;
@@ -43,8 +43,8 @@ public class Poisoner extends Weapon
     @Override
     public void draw(Graphics2D g)
     {
-    	int drawx = (int) (owner.getÑX()-Game.x);
-    	int drawy = (int) (owner.getÑY()-Game.y);
+    	int drawx = (int) (owner.getCX()-Game.x);
+    	int drawy = (int) (owner.getCY()-Game.y);
 
 		double angle = owner.getAngle();
 		  

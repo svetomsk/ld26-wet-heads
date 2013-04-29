@@ -36,7 +36,7 @@ class Level_complete extends JFrame
     public void paint(Graphics g)
     {
     	super.paint(g);
-        g.drawImage(current, 0, 0, width, height, this);
+    	g.drawImage(current, 0, 0, width, height, this);
     }   
     
     private void initializeButton()

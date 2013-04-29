@@ -58,7 +58,7 @@ public class SnakePart extends Mob
 	public void damage(int damage, int knockback, double dir)
 	{
 		if(damage == 0) return;
-		new Blood(get—X(), get—Y(), world);
+		new Blood(getCX(), getCY(), world);
 		frontPart.damage(damage, 0, 0);
 	}
     @Override
@@ -84,17 +84,18 @@ public class SnakePart extends Mob
     }
     @Override
 	protected void animationTick(){}
+    
     @Override
     public void draw(Graphics2D g)
     {
-    	int drawx = (int) (get—X()-Game.x);
-    	int drawy = (int) (get—Y()-Game.y);
+    	int drawx = (int) (getCX()-Game.x);
+    	int drawy = (int) (getCY()-Game.y);
 
-//		g.rotate(angle+Math.PI/2, drawx, drawy);
-//		g.drawImage(img, drawx-img.getWidth(null)/2, drawy-img.getHeight(null)/2, null);
-//		g.rotate(-angle-Math.PI/2, drawx, drawy);
+		g.rotate(angle+Math.PI/2, drawx, drawy);
+		g.drawImage(img, drawx-img.getWidth(null)/2, drawy-img.getHeight(null)/2, null);
+		g.rotate(-angle-Math.PI/2, drawx, drawy);
         
-		drawBounds(g);
+//		drawBounds(g);
     }
     
     @Override
@@ -151,14 +152,12 @@ public class SnakePart extends Mob
 		return prevAngle;
 	}
 
-	public void addCoords(long dx, long dy) 
-	{
-		x += dx;
-		y += dy;
-	}
 	public void setCoords(long x, long y) 
 	{
-		this.x = x;
-		this.y = y;
+		if(x == getCX() && y == getCY()) return;
+		angle = getAngle(x-getCX(), y-getCY())+Math.PI/2;
+		
+		this.x = x - getWidth()/2;
+		this.y = y - getHeight()/2;
 	}
 }

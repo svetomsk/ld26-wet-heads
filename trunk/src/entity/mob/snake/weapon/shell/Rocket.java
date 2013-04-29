@@ -16,7 +16,7 @@ public class Rocket extends Shell
 	{
 		if(mob.getGroup() != owner.getGroup())
 		{
-			new Boom().init(get—X(), get—Y(), 0, 0, 0, 0, getWorld());
+			new Boom().init(getCX(), getCY(), 0, 0, 0, 0, getWorld());
 			delete();
 		}
 		return super.interactOnMob(mob);
@@ -27,7 +27,7 @@ public class Rocket extends Shell
 	{
 		if(!isDeleted)
 		{
-			new Boom().init(get—X(), get—Y(), 0, 0, 0, 0, getWorld());
+			new Boom().init(getCX(), getCY(), 0, 0, 0, 0, getWorld());
 			delete();
 		}
 	}
@@ -40,8 +40,8 @@ public class Rocket extends Shell
     @Override
     public void draw(Graphics2D g)
     {
-    	int drawx = (int) (get—X()-Game.x);
-    	int drawy = (int) (get—Y()-Game.y);
+    	int drawx = (int) (getCX()-Game.x);
+    	int drawy = (int) (getCY()-Game.y);
 
 		double angle = getAngle(getLVX(), getLVY()) - Math.PI/2;
 		  

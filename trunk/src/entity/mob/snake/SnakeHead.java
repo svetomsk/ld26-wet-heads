@@ -39,23 +39,19 @@ public class SnakeHead extends SnakePart
 		Group.character.addMob(this);
 		group = Group.character;
 		
-		body.add((SnakePart) new SnakePart().init(get—X()+getWidth(), get—Y(), 0, 0, 0, 0, world, this));
-		for(int q=0;q<64;q++)
+		body.add((SnakePart) new SnakePart().init(getCX()+getWidth(), getCY(), 0, 0, 0, 0, world, this));
+		for(int q=0;q<8;q++)
 		{
 			SnakePart part = body.get(body.size()-1);
-			body.add((SnakePart) new SnakePart().init(part.get—X()+part.getWidth(), part.get—Y()-part.getHeight()/2, 0, 0, 0, 0, world, part));
+			body.add((SnakePart) new SnakePart().init(part.getCX()+part.getWidth(), part.getCY()-part.getHeight()/2, 0, 0, 0, 0, world, part));
 		}
 		SnakePart part = body.get(body.size()-1);
-		body.add((SnakePart) new SnakeTail().init(part.get—X()+part.getWidth(), part.get—Y(), 0, 0, 0, 0, world, part));
+		body.add((SnakePart) new SnakeTail().init(part.getCX()+part.getWidth(), part.getCY(), 0, 0, 0, 0, world, part));
 		
-		bodyPath = new Path(getX(), getY());
+		bodyPath = new Path(getCX(), getCY());
 	}
 	
-	private boolean speedUp = false;
-	
-//	private double fluct = 0;
-//	private double deltaFluct = 0.01;
-//	private double borderFluct = 1.0/12;
+//	private boolean speedUp = false;
 	
 	@Override
 	public void tick()
@@ -63,19 +59,11 @@ public class SnakeHead extends SnakePart
 		v++;
 		slowly();
 		
-		speedUp = false;
+//		speedUp = false;
 		super.tick();
 		
-		bodyPath.add(x, y);
+		bodyPath.add(getCX(), getCY());
 		bodyPath.use(body);
-		
-//		fluct += deltaFluct;
-//		if(Math.abs(fluct)>borderFluct)
-//		{
-//			deltaFluct *= -1;
-//		}
-//		
-//		prevAngle = angle + fluct * Math.PI;
 		
 		lvx = v*Math.cos(angle);
 		lvy = v*Math.sin(angle);
@@ -85,13 +73,13 @@ public class SnakeHead extends SnakePart
 	{
 		v *= getSpeed()/(getSpeed()+1);
 	}
-	@Override
-	public void onUp() 
-	{
-		super.onUp();
-		v++;
-		speedUp = true;
-	}
+//	@Override
+//	public void onUp() 
+//	{
+//		super.onUp();
+//		v++;
+//		speedUp = true;
+//	}
 	
 	private double criticalAngle = Math.PI/4; 
 	
@@ -100,22 +88,24 @@ public class SnakeHead extends SnakePart
 	{
 //		if(getAngle(getX() - backPart.getX(), getY() - backPart.getY())-criticalAngle)
 		int k;
-		if(speedUp)
-		{
-			k = 70;
-		}
-		else k = 40;
+//		if(speedUp)
+//		{
+//			k = 70;
+//		}
+//		else
+			k = 40;
 		angle -= Math.PI/k;
 	}
 	@Override
 	public void onRight()
 	{
 		int k;
-		if(speedUp)
-		{
-			k = 70;
-		}
-		else k = 40;
+//		if(speedUp)
+//		{
+//			k = 70;
+//		}
+//		else
+			k = 40;
 		angle += Math.PI/k;
 	}
 
@@ -126,7 +116,7 @@ public class SnakeHead extends SnakePart
 		hp -= Math.max(damage - getStrength(), 0);
 		for(int q=0;q<1;q++)
 		{
-			new Blood(get—X(), get—Y(), world);
+			new Blood(getCX(), getCY(), world);
 		}
 	}	
     @Override
@@ -137,8 +127,8 @@ public class SnakeHead extends SnakePart
     @Override
     public void draw(Graphics2D g)
     {
-    	int drawx = (int) (get—X()-Game.x);
-    	int drawy = (int) (get—Y()-Game.y);
+    	int drawx = (int) (getCX()-Game.x);
+    	int drawy = (int) (getCY()-Game.y);
 		  
 		g.rotate(angle+Math.PI/2, drawx, drawy);
 		g.drawImage(img, drawx-img.getWidth(null)/2, drawy-3*img.getHeight(null)/4, null);
@@ -152,7 +142,7 @@ public class SnakeHead extends SnakePart
     @Override
 	public double getSpeed()
 	{
-		return 8;
+		return 16;
 	}
     @Override
 	public int getMaxHP()
@@ -189,6 +179,9 @@ public class SnakeHead extends SnakePart
 			hp = getMaxHP();
 		}
 		addBody();
+		addBody();
+		addBody();
+		control.feeded();
 	}
 	
 	private void addBody()
@@ -199,7 +192,7 @@ public class SnakeHead extends SnakePart
 		
 		body.remove(body.size()-1);
 		
-		nbp.init(tail.get—X(), tail.get—Y(), 0, 0, 0, 0, world, bp);
+		nbp.init(tail.getCX(), tail.getCY(), 0, 0, 0, 0, world, bp);
 		nbp.setFrontPart(bp);
 		nbp.setBackPart(tail);
 		bp.setBackPart(nbp);
@@ -216,6 +209,6 @@ public class SnakeHead extends SnakePart
 
 	public void setNewWeapon(Weapon wep)
 	{
-		this.wep = wep.init(get—X(), get—Y(), 0, 0, 0, 0, world, this);
+		this.wep = wep.init(getCX(), getCY(), 0, 0, 0, 0, world, this);
 	}
 }

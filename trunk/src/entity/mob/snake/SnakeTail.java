@@ -17,19 +17,19 @@ public class SnakeTail extends SnakePart
 	@Override
 	public void tick()
 	{
-		angle = getAngle(frontPart.frontPart.get—X() - frontPart.get—X(), frontPart.frontPart.get—Y() - frontPart.get—Y()) - Math.PI/2; 
+		angle = getAngle(frontPart.frontPart.getCX() - frontPart.getCX(), frontPart.frontPart.getCY() - frontPart.getCY()) - Math.PI/2; 
 				
 //    	double dx = frontPart.getX() - getWidth()*Math.cos(angle);    	
 //    	double dy = frontPart.getY() - getWidth()*Math.sin(angle);
 //    	
 //    	angle = getAngle(dx, dy) - Math.PI/2;
     	
-    	double r2 = (frontPart.get—X()-get—X())*(frontPart.get—X()-get—X()) + (frontPart.get—Y()-get—Y())*(frontPart.get—Y()-get—Y());
+    	double r2 = (frontPart.getCX()-getCX())*(frontPart.getCX()-getCX()) + (frontPart.getCY()-getCY())*(frontPart.getCY()-getCY());
     	
     	if(segment_gap*segment_gap < r2)
     	{
-    		setX((long) (frontPart.get—X() + segment_gap*Math.cos(angle)));
-    		setY((long) (frontPart.get—Y() + segment_gap*Math.sin(angle)));
+    		setX((long) (frontPart.getCX() + segment_gap*Math.cos(angle)));
+    		setY((long) (frontPart.getCY() + segment_gap*Math.sin(angle)));
     	}
 	}
     @Override

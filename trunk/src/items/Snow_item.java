@@ -29,8 +29,8 @@ public class Snow_item extends Item{
 	@Override
 	public void draw(Graphics2D g)
 	{
-		int drawx = (int) (get—X()-Game.x);
-    	int drawy = (int) (get—Y()-Game.y);
+		int drawx = (int) (getCX()-Game.x);
+    	int drawy = (int) (getCY()-Game.y);
 		g.drawImage(img, drawx-img.getWidth(null)/2, drawy-img.getHeight(null)/2, null);
 	}
 }
