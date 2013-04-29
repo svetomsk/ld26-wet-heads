@@ -42,7 +42,7 @@ public class SnakeHead extends SnakePart
 		group = Group.character;
 		
 		body.add((SnakePart) new SnakePart().init(get—X()+getWidth(), get—Y(), 0, 0, 0, 0, world, this));
-		for(int q=0;q<9;q++)
+		for(int q=0;q<64;q++)
 		{
 			SnakePart part = body.get(body.size()-1);
 			body.add((SnakePart) new SnakePart().init(part.get—X()+part.getWidth(), part.get—Y()-part.getHeight()/2, 0, 0, 0, 0, world, part));
@@ -55,6 +55,10 @@ public class SnakeHead extends SnakePart
 	
 	private boolean speedUp = false;
 	
+//	private double fluct = 0;
+//	private double deltaFluct = 0.01;
+//	private double borderFluct = 1.0/12;
+	
 	@Override
 	public void tick()
 	{
@@ -63,6 +67,14 @@ public class SnakeHead extends SnakePart
 		
 		speedUp = false;
 		super.tick();
+		
+//		fluct += deltaFluct;
+//		if(Math.abs(fluct)>borderFluct)
+//		{
+//			deltaFluct *= -1;
+//		}
+//		
+//		prevAngle = angle + fluct * Math.PI;
 		
 		lvx = v*Math.cos(angle);
 		lvy = v*Math.sin(angle);
