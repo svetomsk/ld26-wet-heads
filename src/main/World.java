@@ -15,6 +15,7 @@ import particle.Particle;
 import block.Block;
 import entity.Entity;
 import entity.mob.Character;
+import entity.mob.snake.weapon.shell.Boom;
 
 public class World
 {
@@ -88,10 +89,11 @@ public class World
 //		{
 		if(islands.size() == 0) return;
 		if(islands.get(0).blocks == null) return;
-			int x = (int) (islands.get(0).blocks.length*BLOCK_SIZE* (1/8+6*Math.random()/8) );
-			int y = (int) (islands.get(0).blocks[0].length*BLOCK_SIZE* (1/8+6*Math.random()/8) );
-			
-			entity.init(x, y, this);
+		
+		int x = (int) (islands.get(0).blocks.length*BLOCK_SIZE* (1.0/32+30*Math.random()/32) );
+		int y = (int) (islands.get(0).blocks[0].length*BLOCK_SIZE* (1.0/32+30*Math.random()/32) );
+		
+		entity.init(x, y, this);
 //		}
 	}
 	

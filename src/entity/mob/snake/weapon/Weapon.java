@@ -37,8 +37,8 @@ public class Weapon extends Entity
     @Override
     public void draw(Graphics2D g)
     {
-    	int drawx = (int) (getX()-Game.x);
-    	int drawy = (int) (getY()-Game.y);
+    	int drawx = (int) (get—X()-Game.x);
+    	int drawy = (int) (get—Y()-Game.y);
 
 		double angle = owner.getAngle();
 		  

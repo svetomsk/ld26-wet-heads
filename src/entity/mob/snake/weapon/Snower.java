@@ -20,7 +20,7 @@ public class Snower extends Weapon
 	{
 		if(currentCooldown < 0)
 		{
-			new Snow().init(owner.getX(), owner.getY(),
+			new Snow().init(owner.getÑX(), owner.getÑY(),
 				Math.cos(owner.getAngle())*rocketSpeed, Math.sin(owner.getAngle())*rocketSpeed,
 				0, 0, owner.getWorld(), owner);
 			currentCooldown = cooldown;
@@ -43,8 +43,8 @@ public class Snower extends Weapon
     @Override
     public void draw(Graphics2D g)
     {
-    	int drawx = (int) (owner.getX()-Game.x);
-    	int drawy = (int) (owner.getY()-Game.y);
+    	int drawx = (int) (owner.getÑX()-Game.x);
+    	int drawy = (int) (owner.getÑY()-Game.y);
 
 		double angle = owner.getAngle();
 		  

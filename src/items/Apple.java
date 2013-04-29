@@ -43,8 +43,8 @@ public class Apple extends Item{
 	@Override
 	public void draw(Graphics2D g)
 	{
-		int drawx = (int) (getX()-Game.x);
-    	int drawy = (int) (getY()-Game.y);
+		int drawx = (int) (get—X()-Game.x);
+    	int drawy = (int) (get—Y()-Game.y);
 		g.drawImage(img, drawx-img.getWidth(null)/2, drawy-img.getHeight(null)/2, null);
 //		drawBounds(g);
 	}

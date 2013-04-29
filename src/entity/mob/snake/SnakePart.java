@@ -3,6 +3,8 @@ package entity.mob.snake;
 import java.awt.Graphics2D;
 import java.awt.Image;
 
+import particle.Blood;
+
 import main.Game;
 import main.Pictures;
 import main.World;
@@ -51,6 +53,8 @@ public class SnakePart extends Mob
 	@Override
 	public void damage(int damage, int knockback, double dir)
 	{
+		if(damage == 0) return;
+		new Blood(get—X(), get—Y(), world);
 		frontPart.damage(damage, 0, 0);
 	}
     @Override
@@ -61,17 +65,17 @@ public class SnakePart extends Mob
     	if(frontPart == null) return;
     	if(backPart == null) return;
     	
-    	double dx = frontPart.getX() - backPart.getX();
-    	double dy = frontPart.getY() - backPart.getY();
+    	double dx = frontPart.get—X() - backPart.get—X();
+    	double dy = frontPart.get—Y() - backPart.get—Y();
     	
     	angle = getAngle(dx, dy) - Math.PI/2;
     	
-    	double r2 = (frontPart.getX()-getX())*(frontPart.getX()-getX()) + (frontPart.getY()-getY())*(frontPart.getY()-getY());
+    	double r2 = (frontPart.get—X()-get—X())*(frontPart.get—X()-get—X()) + (frontPart.get—Y()-get—Y())*(frontPart.get—Y()-get—Y());
     	
     	if(segment_gap*segment_gap < r2)
     	{
-    		setX((long) (frontPart.getX() + segment_gap*Math.cos(angle)));
-    		setY((long) (frontPart.getY() + segment_gap*Math.sin(angle)));
+    		setX((long) (frontPart.get—X() + segment_gap*Math.cos(angle)));
+    		setY((long) (frontPart.get—Y() + segment_gap*Math.sin(angle)));
     	}
 //    	if(backPart == null) return;
     	
@@ -103,26 +107,13 @@ public class SnakePart extends Mob
     @Override
     public void draw(Graphics2D g)
     {
-    	int drawx = (int) (x-Game.x+getWidth()/2);
-    	int drawy = (int) (y-Game.y+getHeight()/2);
+    	int drawx = (int) (get—X()-Game.x);
+    	int drawy = (int) (get—Y()-Game.y);
 
-//		double angle = getAngle(lvx, lvy);
-		  
 		g.rotate(angle+Math.PI/2, drawx, drawy);
 		g.drawImage(img, drawx-img.getWidth(null)/2, drawy-img.getHeight(null)/2, null);
 		g.rotate(-angle-Math.PI/2, drawx, drawy);
         
-//        double angle = getAngle(control.getX()-drawx, control.getY()-drawy)+Math.PI/2;
-        
-//        Image eye = control.getX()-drawx >= 0 ? Pictures.eye_right : Pictures.eye_left;
-//        if(control.getX()-drawx < 0 ) angle -= Math.PI;
-//        
-//        g.rotate(angle, drawx, drawy);
-//        g.drawImage(eye, drawx-width/2, drawy-height/2, null);
-//        g.rotate(-angle, drawx, drawy);
-        
-//        super.draw(g);
-//        drawHealth(g);
 //		drawBounds(g);
     }
     
@@ -159,11 +150,11 @@ public class SnakePart extends Mob
     @Override
 	public int getWidth()
 	{
-		return 64;
+		return 48;
 	}
 	@Override
 	public int getHeight()
 	{
-		return 64;
+		return 48;
 	}
 }

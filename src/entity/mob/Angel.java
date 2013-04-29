@@ -14,7 +14,7 @@ public class Angel extends Mob{
 	@Override
 	protected boolean interactOnCharacter(Character character) 
 	{
-		double dir = character.getX()-x >= 0 ? 1 : -1; 
+		double dir = character.getÑX()-x >= 0 ? 1 : -1; 
 		character.damage(getDamage(), getKnokback(), dir);
 		return true;
 	}
