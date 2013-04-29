@@ -82,7 +82,6 @@ public class SnakePart extends Mob
     protected void initPictures() 
     {
     	img = Pictures.bodysnake;
-    	super.initPictures();
     }
     @Override
 	protected void animationTick(){}

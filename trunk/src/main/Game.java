@@ -235,8 +235,8 @@ public class Game extends Canvas implements Runnable
     //            g.setColor(new Color((float)(1-world.character.hp), (float)world.character.hp, (float)0.0));
     //            g.fillRect(32, 32, (int)(world.character.hp * WIDTH/3), 8);
 
-                g.setColor(Color.GRAY);
-                g.drawString(frames, WIDTH - frames.length() * 12, 12);
+//                g.setColor(Color.GRAY);
+//                g.drawString(frames, WIDTH - frames.length() * 12, 12);
 
                 g.scale(2, 2);
 

@@ -85,7 +85,7 @@ public class Enemy extends Mob
     @Override
     protected void initPictures() 
     {
-    	img = Pictures.enemy;
+    	img = Pictures.monster;
     }
     @Override
     public void draw(Graphics2D g)

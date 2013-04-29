@@ -1,9 +1,5 @@
 package entity.mob.snake.weapon;
 
-import java.awt.Graphics2D;
-import java.awt.Image;
-
-import main.Game;
 import main.Pictures;
 import entity.mob.snake.weapon.shell.Rocket;
 
@@ -36,6 +32,6 @@ public class RocketLauncher extends Weapon
     @Override
     protected void initPictures() 
     {
-    	img = Pictures.rocket_item;
+    	img = Pictures.rocket_presized;
     }
 }
