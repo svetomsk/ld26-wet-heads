@@ -75,10 +75,13 @@ public class Level
             }
         }
         g.setColor(sn);
-        for(Point p : Snake.body)
+        try
         {
-            g.fillRect(p.x * size, p.y * size, size, size);
-        }
+            for(Point p : Snake.body)
+            {
+                g.fillRect(p.x * size, p.y * size, size, size);
+            }
+        }catch(Exception exc){}
         
         g.setColor(Color.BLACK);
         g.setFont(new Font("Score", Font.BOLD, 30));
