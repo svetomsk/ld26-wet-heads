@@ -187,10 +187,19 @@ public class Level
     
     static private void updateKeyState()
     {
-        if(input.up.down) Level.setVector(0);
-        if(input.left.down) Level.setVector(1);
-        if(input.down.down) Level.setVector(2);
-        if(input.right.down) Level.setVector(3);
+        int count = 0;
+        if(input.up.down) count++;
+        if(input.left.down) count++;
+        if(input.down.down) count++;
+        if(input.right.down) count++;
+        if(count > 1) {}
+        else
+        {
+            if(input.up.down) Level.setVector(0);
+            if(input.left.down) Level.setVector(1);
+            if(input.down.down) Level.setVector(2);
+            if(input.right.down) Level.setVector(3);
+        }
     }
 }
 
